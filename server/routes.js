@@ -1,12 +1,12 @@
 const path = require('path')
 const express = require('express');
-
+const controllers = require('./controllers')
 
 const routes = express.Router();
 
-routes.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-  });
+
+//routes.get("/api", controllers.read);
+routes.get("/api", controllers.create);
 
 routes.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
