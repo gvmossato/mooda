@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 
 import { TbWind } from 'react-icons/tb';
-import { FiWind } from 'react-icons/fi';
-
-import { RiUserLine, RiUserFill, RiWindyFill } from 'react-icons/ri'
-import {
-    MdOutlineWaterDrop, MdWaterDrop
-} from 'react-icons/md';
 import { AiOutlineSmile, AiFillSmile } from 'react-icons/ai';
-import {
-    BsLightbulb, BsLightbulbFill,
-    BsThermometerLow, BsThermometerHigh,
-
-} from 'react-icons/bs';
-
+import { MdOutlineWaterDrop, MdWaterDrop } from 'react-icons/md';
+import { RiUserLine, RiUserFill, RiWindyFill } from 'react-icons/ri'
+import { BsLightbulb, BsLightbulbFill, BsThermometerLow, BsThermometerHigh } from 'react-icons/bs';
 
 import "./style.css";
 
@@ -68,5 +59,3 @@ function SensorsBar() {
 }
 
 export default SensorsBar;
-
-
