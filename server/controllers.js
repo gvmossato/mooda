@@ -1,6 +1,6 @@
 const _ = require('lodash')
 
-const validateRequest = require('./database/validate.js')
+const validateRequest = require('../database/validate')
 
 
 module.exports = {

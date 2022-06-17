@@ -1,9 +1,9 @@
-const sequelize = require('./db');
-const { DataTypes } = require('sequelize');
+'use strict';
 
-
-sequelize.define('Sensors', {
-    id: {
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('Sensors', {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -43,12 +43,10 @@ sequelize.define('Sensors', {
         type: DataTypes.BOOLEAN,
         allowNull: true
     },
-}, {
-    timestamps: false
-});
+    })
+  },
 
-(async () => {
-    return await sequelize.sync();
-})();
-
-module.exports = sequelize;
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('Sensors');
+  }
+};
