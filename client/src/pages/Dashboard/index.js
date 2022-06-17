@@ -2,6 +2,10 @@ import React from 'react';
 
 import PlantReview from '../../components/PlantReview';
 import SensorsBar from '../../components/SensorsBar';
+import SensorPlot from '../../components/SensorSummary';
+import SensorSummary from '../../components/SensorSummary copy';
+
+import './styles.scoped.css'
 
 
 export default function Dashboard() {
@@ -34,13 +38,15 @@ export default function Dashboard() {
     ]
 
     return(
-        <div>
-            <p>Dashboard</p>
-
+        <main>
             { <PlantReview props={{ status, happiness }} /> }
 
-            { <SensorsBar /> }
+            <article>
+                { <SensorPlot /> }
+                { <SensorSummary /> }
+            </article>
 
-        </div>
+            { <SensorsBar /> }
+        </main>
     );
 }
