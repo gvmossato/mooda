@@ -49,6 +49,6 @@ sequelize.define('Sensors', {
 
 (async () => {
     return await sequelize.sync();
-})()
+})();
 
 module.exports = sequelize;

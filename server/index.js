@@ -8,7 +8,7 @@ const router = require('./routes');
 global.sequelize = sequelize
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || process.env.SERVER_PORT;
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

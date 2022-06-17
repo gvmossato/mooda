@@ -9,7 +9,11 @@ const routes = express.Router();
 routes.get("/api", controllers.create);
 
 routes.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    if (process.env.NODE_ENV == 'production') {
+        res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    } else {
+        res.status(301).redirect(`http://localhost:${process.env.CLIENT_PORT}/`);
+    }
 });
 
 module.exports = routes
