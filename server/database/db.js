@@ -16,7 +16,8 @@ if (process.env.NODE_ENV === 'development') {
                     require: true,
                     rejectUnauthorized: false
                 }
-            }
+            },
+            logging: false
         }
     )
 }
@@ -30,4 +31,4 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-module.exports = sequelize;
+global.sequelize = sequelize;

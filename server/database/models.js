@@ -1,11 +1,11 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db');
 
-const Sensors = sequelize.define('sensors', {
+global.sequelize.define('Sensors', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
+        unique: true,
         primaryKey: true
     },
     date: {
@@ -41,6 +41,6 @@ const Sensors = sequelize.define('sensors', {
         type: DataTypes.BOOLEAN,
         allowNull: true
     },
+}, {
+    timestamps: false,
 })
-
-module.exports = Sensors;
