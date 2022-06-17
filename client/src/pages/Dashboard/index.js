@@ -2,8 +2,8 @@ import React from 'react';
 
 import PlantReview from '../../components/PlantReview';
 import SensorsBar from '../../components/SensorsBar';
-import SensorPlot from '../../components/SensorSummary';
-import SensorSummary from '../../components/SensorSummary copy';
+import SensorSummary from '../../components/SensorSummary';
+import SensorPlot from '../../components/SensorPlot';
 
 import './styles.scoped.css'
 

@@ -1,14 +1,14 @@
 import "./styles.scoped.css";
 
 
-function SensorSummary() {
+function SensorPlot() {
     return (
         <section>
-            <h2>
-                DATA IN REVIEW
-            </h2>
+            <h1>
+                GAMER PLOT
+            </h1>
         </section>
     );
 }
 
-export default SensorSummary;
+export default SensorPlot;
