@@ -1,6 +1,8 @@
+const sequelize = require('./db');
 const { DataTypes } = require('sequelize');
 
-global.sequelize.define('Sensors', {
+
+sequelize.define('Sensors', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -42,5 +44,11 @@ global.sequelize.define('Sensors', {
         allowNull: true
     },
 }, {
-    timestamps: false,
-})
+    timestamps: false
+});
+
+(async () => {
+    return await sequelize.sync();
+})()
+
+module.exports = sequelize;

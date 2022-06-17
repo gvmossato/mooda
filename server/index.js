@@ -1,14 +1,11 @@
-require('dotenv').config()
-require('./database/db')
+require('dotenv').config();
 
 const path = require('path')
 const express = require('express');
+const sequelize = require('./database/models');
 const router = require('./routes');
 
-
-(async () => {
-    return await global.sequelize.sync();
-})()
+global.sequelize = sequelize
 
 const app = express();
 const PORT = process.env.PORT || 3001;

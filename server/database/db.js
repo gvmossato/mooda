@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'development') {
     var sequelize = new Sequelize({
         dialect: 'sqlite',
         storage: './db.sqlite'
-    })
+    });
 } else {
     var sequelize = new Sequelize(
         process.env.DATABASE_URL,
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
             },
             logging: false
         }
-    )
+    );
 }
 
 sequelize
@@ -31,4 +31,4 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-global.sequelize = sequelize;
+module.exports = sequelize;
