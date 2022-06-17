@@ -1,29 +1,19 @@
+require('dotenv').config()
+
 const path = require('path')
 const express = require('express');
+
 const router = require('./routes');
+const sequelize = require('./db');
 
 
-
-(async () => {
-    const sequelize = require('./db');
-    const Sensors = require('./models');
-
-    try {
-        const resultado = await sequelize.sync();
-        console.log(resultado);
-    } catch (error) {
-        console.log(error);
-    }
-})();
-
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001; // Defaults to development port
 
 const app = express();
 
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on port ${PORT}`);
 })
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
-
 app.use(router)
