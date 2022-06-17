@@ -6,7 +6,7 @@ import { MdOutlineWaterDrop, MdWaterDrop } from 'react-icons/md';
 import { RiUserLine, RiUserFill, RiWindyFill } from 'react-icons/ri'
 import { BsLightbulb, BsLightbulbFill, BsThermometerLow, BsThermometerHigh } from 'react-icons/bs';
 
-import "./style.css";
+import "./styles.scoped.css";
 
 
 function SensorsBar() {
