@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const path = require('path')
 const express = require('express');
-const sequelize = require('../database/models');
+const sequelize = require('../database/models/models');
 const router = require('./routes');
 
 global.sequelize = sequelize
