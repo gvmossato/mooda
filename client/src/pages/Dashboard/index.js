@@ -8,6 +8,8 @@ export default function Dashboard() {
             <p>Dashboard</p>
 
             { <SensorsBar/> }
+            <p>Non scoped styled button:</p>
+            <button>Global style only</button>
         </div>
     );
 }
