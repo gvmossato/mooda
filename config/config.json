@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": null,
+    "password": null,
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "use_env_variable": "DATABSE_URL",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+          "require": true,
+          "rejectUnauthorized": false
+      }
+  }
+  }
+}
