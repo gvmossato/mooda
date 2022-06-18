@@ -5,8 +5,8 @@ const controllers = require('./controllers')
 const routes = express.Router();
 
 
-//routes.get("/api", controllers.read);
-routes.get("/api", controllers.create);
+routes.get("/api", controllers.read);
+routes.post("/api", controllers.create);
 
 routes.get('*', (req, res) => {
     if (process.env.NODE_ENV == 'production') {
