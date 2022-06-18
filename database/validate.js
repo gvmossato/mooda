@@ -20,7 +20,7 @@ function validateRequest(body) {
         'airQuality',   'presence'
     ]
 
-    jsonBody = query2JSON(body)
+    jsonBody = query2JSON(body.replaceAll('\"', ''))
 
     return _.pickBy(jsonBody, (val, key) => {
         if (validFields.includes(key)) {
