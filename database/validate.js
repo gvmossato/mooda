@@ -5,6 +5,10 @@ function isNumericString(str) {
     return (typeof str === "string" && !isNaN(str) && !isNaN(parseFloat(str)))
 }
 
+function isBooleanString(str) {
+    return ['0', '1'].includes(str)
+}
+
 function validateRequest(req) {
     expectedFields = [
         'luminosity',
@@ -16,9 +20,11 @@ function validateRequest(req) {
     ]
 
     return _.pickBy(req, (val, key) => {
-        return expectedFields.includes(key) && isNumericString(val)
+        if (expectedFields.includes(key)) {
+            return key === 'presence' ? isBooleanString(val) : isNumericString(val)
+        }
+        return false
     })
-
 }
 
 module.exports = validateRequest
