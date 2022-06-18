@@ -2,10 +2,10 @@ const _ = require('lodash')
 
 const validateRequest = require('../database/validate')
 
-
 module.exports = {
     async read(req, res) {
-        return res.json({message : 'Server is up!'});
+        const sensors = await global.sequelize.models.Sensors.findAll();
+        return res.json(sensors, null, 4);
     },
 
     async create(req, res) {
