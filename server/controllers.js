@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async create(req, res) {
-        const cleanedReq = validateRequest(req.query)
+        const cleanedReq = validateRequest(req.body)
 
         if (_.isEmpty(cleanedReq)) {
             return res.status(400).json({ message: 'No valid data sent' })
