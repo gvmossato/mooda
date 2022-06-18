@@ -6,7 +6,7 @@ function isNumericString(str) {
 }
 
 function isBooleanString(str) {
-    return ['0', '1'].includes(str)
+    return (typeof str === "string" && ['0', '1'].includes(str))
 }
 
 function validateRequest(req) {
