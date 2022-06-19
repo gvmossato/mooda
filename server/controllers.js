@@ -14,7 +14,7 @@ module.exports = {
         const endDate = moment(cleanedReq.endDate).add(1, 'days') ?? moment().add(1, 'days');
 
         const queryResult = await global.sequelize.models.Sensors.findAll({
-            ...( sensor && {attributes: [ 'id' , 'date', sensor ]}),
+            ...(sensor && {attributes: [ 'id' , 'date', sensor ]}),
             where: {
                 date: {
                     [Op.and]: [

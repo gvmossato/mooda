@@ -3,52 +3,88 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Sensors', {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        unique: true,
-        primaryKey: true
+    async up (queryInterface, Sequelize) {
+        await queryInterface.createTable('Sensors', {
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                allowNull: false,
+                unique: true,
+                primaryKey: true
+            },
+            date: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
+            temperature: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            luminosity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            soilHumidity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            airHumidity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            airQuality: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            happiness: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            presence: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false
+            },
+        })
     },
-    date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    temperature: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    luminosity: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    soilHumidity: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    airHumidity: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    airQuality: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    happiness: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    presence: {
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    })
-  },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sensors');
-  }
+    async up (queryInterface, Sequelize) {
+        await queryInterface.createTable('IsFine', {
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                allowNull: false,
+                unique: true,
+                primaryKey: true
+            },
+            date: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
+            temperature: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            luminosity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            soilHumidity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            airHumidity: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            },
+            airQuality: {
+                type: DataTypes.FLOAT,
+                allowNull: false
+            }
+        })
+    },
+
+    async down (queryInterface, Sequelize) {
+        await queryInterface.dropTable('Sensors');
+        await queryInterface.dropTable('IsFine');
+    }
 };
