@@ -107,6 +107,10 @@ module.exports = {
             airQuality: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false
+            },
+            overall: {
+                type: DataTypes.FLOAT,
+                allowNull: false
             }
         })
     },

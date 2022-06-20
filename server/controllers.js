@@ -58,7 +58,7 @@ module.exports = {
             { ...isFinePost, date }
         )
 
-        const happinessPost = handleHappinessPost()
+        const happinessPost = handleHappinessPost(validSensors, date)
         const happinessSaved = await global.sequelize.models.Happiness.create(
             { ...happinessPost, date }
         )

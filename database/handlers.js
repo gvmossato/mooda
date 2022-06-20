@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const moment = require('moment')
 
-const thresholds = require('../database/thresholds')
+const { thresholds, weights } = require('./constants')
 
 
 function isNumericString(str) {
@@ -18,6 +18,15 @@ function isDateString(str) {
 
 function query2JSON(queryStr) {
     return Object.fromEntries(new URLSearchParams(queryStr));
+}
+
+function insertOverallHappiness(happiness) {
+    overall = _.sum(_.values(
+        _.mergeWith(happiness, weights, _.multiply)
+    ))
+
+    happiness.overall = _.round(overall * 5/14, 2) // Maps from [0,14] to [0,5]
+    return happiness
 }
 
 
@@ -52,17 +61,24 @@ module.exports = {
         )
     },
 
-    handleHappinessPost(sensorPost) {
-        const lastDay = await global.sequelize.models.IsFine.findAll({
-            ...(sensor && {attributes: [ 'id' , 'date', sensor ]}),
+    handleHappinessPost(validSensors, date) {
+        const isFineHistory = await global.sequelize.models.IsFine.findAll({
+            attributes: validSensors,
             where: {
                 date: {
-                    [Op.and]: [
-                        { [Op.gte]: startDate },
-                        { [Op.lte]: endDate }
-                    ]
+                    [Op.gte]: date.subtract(24, 'hours')
                 }
             }
         });
+        const fineAmount = _.reduce(isFineHistory, (result, value) => {
+            return _.mergeWith(result, value, _.add)
+        })
+        const totalAmount = length(isFineHistory)
+
+        const happinessPost = insertOverallHappiness(_.mapValues(
+            fineAmount, (value) => { return (value / totalAmount) >= 0.58 } // Approx. 14 hours per day
+        ))
+
+        return happinessPost
     }
 };

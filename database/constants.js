@@ -21,4 +21,12 @@ const thresholds = {
     }
 }
 
-module.exports = thresholds
+const weights = {
+    luminosity:   3,
+    temperature:  1,
+    soilMoisture: 4,
+    airMoisture:  1,
+    airQuality:   3
+}
+
+module.exports = { thresholds, weights }

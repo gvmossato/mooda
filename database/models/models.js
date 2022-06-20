@@ -109,6 +109,10 @@ sequelize.define('Happiness', {
     airQuality: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    overall: {
+        type: DataTypes.FLOAT,
+        allowNull: false
     }
 }, {
     timestamps: false
