@@ -1,23 +1,23 @@
 const thresholds = {
     luminosity: {
-        min: 1500,
+        min: 2000,
         max: Infinity
     },
     temperature: {
-        min: 10,
-        max: 40
+        min: 15,
+        max: 27
     },
     soilHumidity: {
-        min: 30,
-        max: 70
+        min: 10,
+        max: 30
     },
     airHumidity: {
-        min: 30,
-        max: 70
+        min: 10,
+        max: 30
     },
     airQuality: {
-        min: 10,
-        max: 90
+        min: 300,
+        max: 2000
     }
 }
 

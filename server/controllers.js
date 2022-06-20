@@ -2,12 +2,16 @@ const _ = require('lodash')
 const { Op } = require("sequelize");
 const moment = require('moment')
 
-const { handleGet, handlePost } = require('../database/validate')
+const {
+    handleSensorsGet,
+    handleSensorsPost,
+    handleIsFineCreate
+} = require('../database/handlers')
 
 
 module.exports = {
     async read(req, res) {
-        const cleanedReq = handleGet(req.query)
+        const cleanedReq = handleSensorsGet(req.query)
 
         const sensor = cleanedReq.sensor ?? false
         const startDate = cleanedReq.startDate ?? moment().subtract(1, 'years');
@@ -29,13 +33,23 @@ module.exports = {
     },
 
     async create(req, res) {
-        const cleanedReq = handlePost(req.body)
+        const sensorPost = handleSensorsPost(req.body)
 
-        if (_.isEmpty(cleanedReq)) {
+        if (_.isEmpty(sensorPost)) {
             return res.status(400).json({ message: 'No valid data sent' })
         }
 
-        const sensorsRead = await global.sequelize.models.Sensors.create(cleanedReq)
-        return res.status(200).json(sensorsRead);
+        const isFine = handleIsFineCreate(sensorPost)
+
+        const date = new Date.now()
+
+        const isFineSaved = await global.sequelize.models.IsFine.create(
+            { ...isFine, date }
+        )
+        const sensorsSaved = await global.sequelize.models.Sensors.create(
+            { ...sensorPost, date }
+        )
+
+        return res.status(200).json(sensorsSaved);
     }
 }
