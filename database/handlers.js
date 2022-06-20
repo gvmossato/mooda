@@ -44,11 +44,25 @@ module.exports = {
         })
     },
 
-    handleIsFineCreate(sensorPost) {
+    handleIsFinePost(sensorPost) {
         return _.transform(
             _.omit(sensorPost, ['happiness', 'presence']), (result, value, key) => {
                 result[key] = thresholds[key].min <= value && value <= thresholds[key].max
             }
         )
+    },
+
+    handleHappinessPost(sensorPost) {
+        const lastDay = await global.sequelize.models.IsFine.findAll({
+            ...(sensor && {attributes: [ 'id' , 'date', sensor ]}),
+            where: {
+                date: {
+                    [Op.and]: [
+                        { [Op.gte]: startDate },
+                        { [Op.lte]: endDate }
+                    ]
+                }
+            }
+        });
     }
 };

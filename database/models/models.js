@@ -22,19 +22,15 @@ sequelize.define('Sensors', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    soilHumidity: {
+    soilMoisture: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    airHumidity: {
+    airMoisture: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
     airQuality: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    happiness: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
@@ -66,11 +62,47 @@ sequelize.define('IsFine', {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    soilHumidity: {
+    soilMoisture: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    airHumidity: {
+    airMoisture: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    airQuality: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    }
+}, {
+    timestamps: false
+});
+
+sequelize.define('Happiness', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        unique: true,
+        primaryKey: true
+    },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    temperature: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    luminosity: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    soilMoisture: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    airMoisture: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },

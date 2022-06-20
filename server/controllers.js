@@ -5,7 +5,8 @@ const moment = require('moment')
 const {
     handleSensorsGet,
     handleSensorsPost,
-    handleIsFineCreate
+    handleIsFinePost,
+    handleHappinessPost
 } = require('../database/handlers')
 
 const validSensors = [
@@ -23,7 +24,7 @@ module.exports = {
         const endDate = moment(cleanedReq.endDate).add(1, 'days') ?? moment().add(1, 'days');
 
         const queryResult = await global.sequelize.models.Sensors.findAll({
-            ...(sensor && {attributes: [ 'id' , 'date', sensor ]}),
+            ...(sensor && {attributes: ['id' , 'date', sensor]}),
             where: {
                 date: {
                     [Op.and]: [
@@ -38,26 +39,30 @@ module.exports = {
     },
 
     async create(req, res) {
-        const sensorPost = handleSensorsPost(req.body, validSensors)
+        const date = Date.now()
+        const sensorsPost = handleSensorsPost(req.body, validSensors)
 
-        if (_.isEmpty(sensorPost)) {
+        if (_.isEmpty(sensorsPost)) {
             return res.status(400).json({ message: 'No valid sensor data sent' })
         }
-        if (!_.has(sensorPost, validSensors)) {
+        if (!_.has(sensorsPost, validSensors)) {
             return res.status(400).json({ message: 'Missing one or more sensor data' })
         }
 
-        const isFine = handleIsFineCreate(sensorPost)
-
-        const date = Date.now()
-
-        const isFineSaved = await global.sequelize.models.IsFine.create(
-            { ...isFine, date }
-        )
         const sensorsSaved = await global.sequelize.models.Sensors.create(
-            { ...sensorPost, date }
+            { ...sensorsPost, date }
         )
 
-        return res.status(200).json([sensorsSaved, isFineSaved]);
+        const isFinePost = handleIsFinePost(sensorsPost)
+        const isFineSaved = await global.sequelize.models.IsFine.create(
+            { ...isFinePost, date }
+        )
+
+        const happinessPost = handleHappinessPost()
+        const happinessSaved = await global.sequelize.models.Happiness.create(
+            { ...happinessPost, date }
+        )
+
+        return res.status(200).json([sensorsSaved, isFineSaved, happinessSaved]);
     }
 }

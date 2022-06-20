@@ -5,7 +5,7 @@ import SensorsBar from '../../components/SensorsBar';
 import SensorSummary from '../../components/SensorSummary';
 import SensorPlot from '../../components/SensorPlot';
 
-import getSensorData from '../../utils/getSensorData';
+// import getSensorData from '../../utils/getSensorData';
 
 import './styles.scoped.css'
 

@@ -7,11 +7,11 @@ const thresholds = {
         min: 15,
         max: 27
     },
-    soilHumidity: {
+    soilMoisture: {
         min: 10,
         max: 30
     },
-    airHumidity: {
+    airMoisture: {
         min: 10,
         max: 30
     },
