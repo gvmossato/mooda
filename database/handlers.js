@@ -22,13 +22,8 @@ function query2JSON(queryStr) {
 
 
 module.exports = {
-    handleSensorsGet(query) {
+    handleSensorsGet(query, validSensors) {
         const validFields = ['sensor', 'startDate', 'endDate'];
-        const validSensors = [
-            'luminosity',   'temperature',
-            'soilHumidity', 'airHumidity',
-            'airQuality',   'presence'
-        ];
 
         return _.pickBy(query, (val, key) => {
             if (validFields.includes(key)) {
@@ -38,17 +33,11 @@ module.exports = {
         })
     },
 
-    handleSensorsPost(body) {
-        const validFields = [
-            'luminosity',   'temperature',
-            'soilHumidity', 'airHumidity',
-            'airQuality',   'presence'
-        ];
-
+    handleSensorsPost(body, validSensors) {
         const jsonBody = query2JSON(body.replaceAll('\"', ''));
 
         return _.pickBy(jsonBody, (val, key) => {
-            if (validFields.includes(key)) {
+            if (validSensors.includes(key)) {
                 return key === 'presence' ? isBooleanString(val) : isNumericString(val);
             }
             return false;

@@ -8,10 +8,15 @@ const {
     handleIsFineCreate
 } = require('../database/handlers')
 
+const validSensors = [
+    'luminosity',   'temperature',
+    'soilHumidity', 'airHumidity',
+    'airQuality',   'presence'
+];
 
 module.exports = {
     async read(req, res) {
-        const cleanedReq = handleSensorsGet(req.query)
+        const cleanedReq = handleSensorsGet(req.query, validSensors)
 
         const sensor = cleanedReq.sensor ?? false
         const startDate = cleanedReq.startDate ?? moment().subtract(1, 'years');
@@ -33,10 +38,13 @@ module.exports = {
     },
 
     async create(req, res) {
-        const sensorPost = handleSensorsPost(req.body)
+        const sensorPost = handleSensorsPost(req.body, validSensors)
 
         if (_.isEmpty(sensorPost)) {
-            return res.status(400).json({ message: 'No valid data sent' })
+            return res.status(400).json({ message: 'No valid sensor data sent' })
+        }
+        if (!_.has(sensorPost, validSensors)) {
+            return res.status(400).json({ message: 'Missing one or more sensor data' })
         }
 
         const isFine = handleIsFineCreate(sensorPost)
