@@ -61,23 +61,23 @@ module.exports = {
                 allowNull: false,
             },
             temperature: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             },
             luminosity: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             },
             soilHumidity: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             },
             airHumidity: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             },
             airQuality: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             }
         })

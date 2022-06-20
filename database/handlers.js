@@ -58,7 +58,7 @@ module.exports = {
     handleIsFineCreate(sensorPost) {
         return _.transform(
             _.omit(sensorPost, ['happiness', 'presence']), (result, value, key) => {
-                result[key] = thresholds[key].min < value && value < thresholds[key].max
+                result[key] = thresholds[key].min <= value && value <= thresholds[key].max
             }
         )
     }

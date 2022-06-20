@@ -41,7 +41,7 @@ module.exports = {
 
         const isFine = handleIsFineCreate(sensorPost)
 
-        const date = new Date.now()
+        const date = Date.now()
 
         const isFineSaved = await global.sequelize.models.IsFine.create(
             { ...isFine, date }
@@ -50,6 +50,6 @@ module.exports = {
             { ...sensorPost, date }
         )
 
-        return res.status(200).json(sensorsSaved);
+        return res.status(200).json([sensorsSaved, isFineSaved]);
     }
 }
