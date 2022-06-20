@@ -11,7 +11,7 @@ const {
 
 const validSensors = [
     'luminosity',   'temperature',
-    'soilHumidity', 'airHumidity',
+    'soilMoisture', 'airMoisture',
     'airQuality',   'presence'
 ];
 
@@ -39,14 +39,16 @@ module.exports = {
     },
 
     async create(req, res) {
-        const date = Date.now()
-        const sensorsPost = handleSensorsPost(req.body, validSensors)
+        const date = moment()
 
+        const sensorsPost = handleSensorsPost(req.body, validSensors)
         if (_.isEmpty(sensorsPost)) {
             return res.status(400).json({ message: 'No valid sensor data sent' })
         }
-        if (!_.has(sensorsPost, validSensors)) {
-            return res.status(400).json({ message: 'Missing one or more sensor data' })
+
+        const missingFields = _.difference(validSensors, _.keys(sensorsPost))
+        if (missingFields.length) {
+            return res.status(400).json({ message: `Missing sensor's data: ${missingFields}` })
         }
 
         const sensorsSaved = await global.sequelize.models.Sensors.create(
@@ -58,7 +60,7 @@ module.exports = {
             { ...isFinePost, date }
         )
 
-        const happinessPost = handleHappinessPost(validSensors, date)
+        const happinessPost = await handleHappinessPost(_.difference(validSensors, ['presence']), date)
         const happinessSaved = await global.sequelize.models.Happiness.create(
             { ...happinessPost, date }
         )
