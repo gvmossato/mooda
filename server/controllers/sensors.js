@@ -7,7 +7,7 @@ const {
     handleSensorsPost,
     handleIsFinePost,
     handleHappinessPost
-} = require('../database/handlers')
+} = require('../../database/handlers')
 
 const validSensors = [
     'luminosity',   'temperature',
@@ -17,13 +17,14 @@ const validSensors = [
 
 module.exports = {
     async read(req, res) {
-        const cleanedReq = handleSensorsGet(req.query, validSensors)
+        const sensorsGet = handleSensorsGet(req.query, validSensors)
 
-        const sensor = cleanedReq.sensor ?? false
-        const startDate = cleanedReq.startDate ?? moment().subtract(1, 'years');
-        const endDate = moment(cleanedReq.endDate).add(1, 'days') ?? moment().add(1, 'days');
+        const sensor = sensorsGet.sensor ?? false
+        const startDate = sensorsGet.startDate ?? moment().subtract(1, 'years');
+        const endDate = moment(sensorsGet.endDate).add(1, 'days') ?? moment().add(1, 'days');
 
         const queryResult = await global.sequelize.models.Sensors.findAll({
+            raw: true,
             ...(sensor && {attributes: ['id' , 'date', sensor]}),
             where: {
                 date: {

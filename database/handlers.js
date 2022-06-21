@@ -45,6 +45,17 @@ module.exports = {
         )
     },
 
+    handleHappinessGet(query) {
+        const validFields = ['startDate', 'endDate'];
+
+        return (
+            _.pickBy(query, (val, key) => {
+                if (validFields.includes(key)) return isDateString(val)
+                return false;
+            })
+        )
+    },
+
     handleSensorsPost(body, validSensors) {
         const jsonBody = query2JSON(body.replaceAll('\"', ''));
 
