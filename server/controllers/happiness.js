@@ -6,7 +6,7 @@ const { handleHappinessGet } = require('../../database/handlers')
 
 module.exports = {
     async read(req, res) {
-        const HappinessGet = handleHappinessGet(req.query, validHappiness)
+        const HappinessGet = handleHappinessGet(req.query)
 
         const sensor = HappinessGet.sensor ?? false
         const startDate = HappinessGet.startDate ?? moment().subtract(1, 'years');
