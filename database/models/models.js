@@ -111,7 +111,7 @@ sequelize.define('Happiness', {
         allowNull: false
     },
     overall: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.FLOAT,
         allowNull: false
     }
 }, {
