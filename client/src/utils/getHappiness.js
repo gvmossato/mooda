@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 
-async function getSensorData(params) {
-    const endpoint = process.env.NODE_ENV === 'development' ? 'localhost:3001/api/sensors' : 'https://mood-a.herokuapp.com/api/sensors'
+async function getHappiness(params) {
+    const endpoint = process.env.NODE_ENV === 'development' ? 'localhost:3001/api/happiness' : 'https://mood-a.herokuapp.com/api/happiness'
     const query = new URLSearchParams(params).toString()
 
     return await axios
@@ -17,4 +17,4 @@ async function getSensorData(params) {
         });
 }
 
-module.exports = getSensorData
+module.exports = getHappiness
