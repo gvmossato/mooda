@@ -1,18 +1,42 @@
+import { indexOf } from "lodash";
+import getStatus from "../../utils/getStatus";
 import "./styles.scoped.css";
 
 
-function HappinessBar(props) {
-    const happiness = props.props
+function HappinessBar() {
+    function getLevel(happiness) {
+        const intervals = [(0,1), (1,2), (2,3), (3,4), (4,6)]
 
-    const statusLevels = (h) => {
+        return intervals.forEach((value) => {
+            const [min, max] = value
+
+            if (min <= happiness && happiness < max) {
+                return indexOf(intervals, value)
+            }
+        })
+    }
+
+    function getName(level) {
+        return ['Péssima', 'Triste', 'Regular', 'Feliz', 'Ótima'][level]
+    }
+
+    function Happiness() {
+        this.overall = getStatus('overall');
+        this.level = getLevel(this.overall);
+        this.name = getName(this.level);
+    }
+
+    function renderStatusLevels(happiness) {
         for (let i=0; i<5; i++) {
             <div
                 id={"level" + i}
-                className={"happiness-level" + (h.level === i ? "currLevel" : "")}
+                className={"happiness-level " + (happiness.level === i ? "current-level" : "")}
             >
             </div>
         }
     }
+
+    const happiness = new Happiness();
 
     return (
         <div>
@@ -20,7 +44,7 @@ function HappinessBar(props) {
                 { happiness.name }
             </h2>
             <div>
-                { statusLevels(happiness) }
+                { renderStatusLevels(happiness) }
             </div>
         </div>
     );
