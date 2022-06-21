@@ -42,9 +42,6 @@ module.exports = {
         const date = moment()
 
         const sensorsPost = handleSensorsPost(req.body, validSensors)
-        if (_.isEmpty(sensorsPost)) {
-            return res.status(400).json({ message: 'No valid sensor data sent' })
-        }
 
         const missingFields = _.difference(validSensors, _.keys(sensorsPost))
         if (missingFields.length) {
@@ -60,7 +57,7 @@ module.exports = {
             { ...isFinePost, date }
         )
 
-        const happinessPost = await handleHappinessPost(_.difference(validSensors, ['presence']), date)
+        const happinessPost = await handleHappinessPost(date, _.difference(validSensors, ['presence']))
         const happinessSaved = await global.sequelize.models.Happiness.create(
             { ...happinessPost, date }
         )

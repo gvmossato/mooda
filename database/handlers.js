@@ -35,34 +35,43 @@ module.exports = {
     handleSensorsGet(query, validSensors) {
         const validFields = ['sensor', 'startDate', 'endDate'];
 
-        return _.pickBy(query, (val, key) => {
-            if (validFields.includes(key)) {
-                return key.includes('Date') ? isDateString(val) : validSensors.includes(val);
-            }
-            return false;
-        })
+        return (
+            _.pickBy(query, (val, key) => {
+                if (validFields.includes(key)) {
+                    return key.includes('Date') ? isDateString(val) : validSensors.includes(val);
+                }
+                return false;
+            })
+        )
     },
 
     handleSensorsPost(body, validSensors) {
         const jsonBody = query2JSON(body.replaceAll('\"', ''));
 
-        return _.pickBy(jsonBody, (val, key) => {
-            if (validSensors.includes(key)) {
-                return key === 'presence' ? isBooleanString(val) : isNumericString(val);
-            }
-            return false;
-        })
-    },
-
-    handleIsFinePost(sensorPost) {
-        return _.transform(
-            _.omit(sensorPost, ['happiness', 'presence']), (result, value, key) => {
-                result[key] = thresholds[key].min <= value && value <= thresholds[key].max
-            }
+        return (
+            _.mapValues(
+                _.pickBy(jsonBody, (val, key) => {
+                    if (validSensors.includes(key)) {
+                        return key === 'presence' ? isBooleanString(val) : isNumericString(val);
+                    }
+                    return false;
+                }),
+                _.toNumber
+            )
         )
     },
 
-    async handleHappinessPost(validSensors, date) {
+    handleIsFinePost(sensorPost) {
+        return (
+            _.transform(
+                _.omit(sensorPost, ['happiness', 'presence']), (result, value, key) => {
+                    result[key] = thresholds[key].min <= value && value <= thresholds[key].max
+                }
+            )
+        )
+    },
+
+    async handleHappinessPost(date, validSensors) {
         const isFineHistory = await global.sequelize.models.IsFine.findAll({
             raw: true,
             attributes: validSensors,
@@ -78,8 +87,12 @@ module.exports = {
         })
         const totalAmount = isFineHistory.length
 
-        return insertOverallHappiness(_.mapValues(
-            fineAmount, (value) => { return (value/totalAmount) >= 0.58 } // Approx. 14 hours per day
-        ))
+        return (
+            insertOverallHappiness(
+                _.mapValues(
+                    fineAmount, (value) => { return (value/totalAmount) >= 0.58 } // Approx. 14 hours per day
+                )
+            )
+        )
     }
 };
