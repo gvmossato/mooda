@@ -1,5 +1,7 @@
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
 import getStatus from '../../utils/getStatus';
+import moodaLogo from '../../assets/mooda.png'
+import plant from '../../assets/plant.png'
 
 import HappinessBar from '../HappinessBar';
 
@@ -32,22 +34,30 @@ function PlantReview() {
 
     return (
         <aside>
-            <img src="" alt="mooda-logo" />
-            <div>
-                <img src="" alt="plant-pic"/>
+
+                <img src={moodaLogo} alt="mooda-logo" />
+
+            <div className="plant-review">
+                <div className="plant-frame">
+                    <img src={plant} alt="plant"/>
+                </div>
 
                 { <HappinessBar /> }
 
-                {
-                    status.map(el => { return (
-                        <div id={el.id} key={el.id}>
-                            <p>{el.name}</p>
-                            <p className={"icon " + (el.isFine ? "check" : "cross")}>
-                                { el.isFine ? <BsCheckCircleFill /> : <BsXCircleFill /> }
-                            </p>
-                        </div>
-                    )})
-                }
+                <div className="status-collection">
+                    {
+                        status.map(el => {
+                            return (
+                                <div className={"status " + el.id} key={el.id}>
+                                    <p>{el.name}</p>
+                                    <p className={"icon " + (el.isFine ? "check" : "cross")}>
+                                        { el.isFine ? <BsCheckCircleFill /> : <BsXCircleFill /> }
+                                    </p>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </aside>
     );

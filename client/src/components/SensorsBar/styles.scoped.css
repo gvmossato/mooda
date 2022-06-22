@@ -1,3 +1,4 @@
-button {
-    color: red;
+aside {
+    display: flex;
+    flex-direction: column;
 }

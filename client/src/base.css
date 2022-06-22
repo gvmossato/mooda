@@ -1,11 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 
+:root {
+    --color-background: #121212;
+    --color-box1: #1E1E1E;
+    --color-box2: #171717;
+    --color-font: #636363;
+
+    --color-luminosity: #FFF600;
+    --color-temperature: #FF5C00;
+    --color-moisture: #00B2FF;
+    --color-airQuality: #8AD5FF;
+    --color-happiness: #FF67F0;
+    --color-presence: #C870FF;
+
+    --color-good: #00FF19;
+    --color-bad: #FF0000;
+}
+
 body {
     font-family: Nunito, Arial, sans-serif;
+    color: var(--color-font);
+    background-color: var(--color-background);
 }
 
 .text-title {
     text-transform: uppercase;
     font-family: Montserrat, Helvetica, sans-serif;
+    text-align: center;
 }
