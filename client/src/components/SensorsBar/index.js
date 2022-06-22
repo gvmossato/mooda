@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+
+import FocusContext from "../../contexts/FocusContext";
 
 import { TbWind } from 'react-icons/tb';
 import { AiOutlineSmile, AiFillSmile } from 'react-icons/ai';
@@ -10,11 +12,23 @@ import "./styles.scoped.css";
 
 
 function SensorsBar() {
-    const sensors = [
+
+
+    const sensorsIcons = [
+        {
+            id: 'moisture',
+            baseIcon: <MdOutlineWaterDrop />,
+            focusIcon: <MdWaterDrop />,
+        },
         {
             id: 'luminosity',
             baseIcon: <BsLightbulb />,
             focusIcon: <BsLightbulbFill />,
+        },
+        {
+            id: 'airQuality',
+            baseIcon: <TbWind />,
+            focusIcon: <RiWindyFill />,
         },
         {
             id: 'temperature',
@@ -22,33 +36,23 @@ function SensorsBar() {
             focusIcon: <BsThermometerHigh />,
         },
         {
-            id: 'umidity',
-            baseIcon: <MdOutlineWaterDrop />,
-            focusIcon: <MdWaterDrop />,
-        },
-        {
-            id: 'air',
-            baseIcon: <TbWind />,
-            focusIcon: <RiWindyFill />,
-        },
-        {
-            id: 'hapiness',
+            id: 'happiness',
             baseIcon: <AiOutlineSmile />,
             focusIcon: <AiFillSmile />,
         },
         {
-            id: 'user',
+            id: 'presence',
             baseIcon: <RiUserLine />,
             focusIcon: <RiUserFill />,
         },
     ];
 
-    const [focus, setFocus] = useState('luminosity');
+    const { focus, setFocus } = useContext(FocusContext)
 
     return (
         <aside>
             {
-                sensors.map(el => { return (
+                sensorsIcons.map(el => { return (
                     <button id={el.id} key={el.id} onClick={() => setFocus(el.id)}>
                         { el.id === focus ? el.focusIcon : el.baseIcon }
                     </button>
