@@ -41,19 +41,27 @@ function HappinessBar() {
     }, [happinessCallback]);
 
     function renderStatusLevels(happiness) {
+        var levelsBar = [];
+
         for (let i=0; i<5; i++) {
-            <div
-                id={"level" + i}
-                key={"level" + i}
-                className={"happiness-level " + (happiness.level === i ? "current-level" : "")}
-            >
-            </div>
+            levelsBar.push(
+                <div
+                    key={"level" + i}
+                    className={
+                        "happiness-level " +
+                        "level" + i +
+                        (happiness.level === i ? " current-level" : "")
+                    }
+                >
+                </div>
+            )
         }
+        return levelsBar
     }
 
     return (
         <div>
-            <h2>
+            <h2 className={"text-title name-level" + happiness.level}>
                 {
                     !happiness.name ?
                         <ThreeDots color="#00BBFF" height={20} width={20} />
@@ -61,7 +69,7 @@ function HappinessBar() {
                         happiness.name
                 }
             </h2>
-            <div>
+            <div className="happiness-bar">
                 {
                     !happiness.name ?
                         <ThreeDots color="#00BBFF" height={20} width={20} />

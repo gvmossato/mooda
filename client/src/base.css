@@ -1,3 +1,11 @@
-button {
-    width: 100px;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
+
+body {
+    font-family: Nunito, Arial, sans-serif;
+}
+
+.text-title {
+    text-transform: uppercase;
+    font-family: Montserrat, Helvetica, sans-serif;
 }

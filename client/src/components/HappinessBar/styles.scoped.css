@@ -1,0 +1,56 @@
+.happiness-bar {
+    display: flex;
+}
+
+.happiness-level {
+    width: 25px;
+    height: 10px;
+    opacity: 0.50;
+    z-index: 0;
+}
+
+.current-level {
+    transform: scale(1.15);
+    opacity: 1.00;
+    z-index: 1;
+}
+
+.level0 {
+    background-color: #FF0000;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.level1 {
+    background-color: #FFA800;
+}
+
+.level2 {
+    background-color: #FFF600;
+}
+
+.level3 {
+    background-color: #ADFF00;
+}
+
+.level4 {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background-color: #00FF19;
+}
+
+.name-level0 {
+    color: #FF0000;
+}
+.name-level1 {
+    color: #FFA800;
+}
+.name-level2 {
+    color: #FFF600;
+}
+.name-level3 {
+    color: #ADFF00;
+}
+.name-level4 {
+    color: #00FF19;
+}
