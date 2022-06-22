@@ -8,11 +8,9 @@ async function getStatus(sensor) {
         sensor,
         startDate: now.subtract(20, 'minutes').format("YYYY-MM-DD HH:mm:ss"),
         endDate: now.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
-    })//.at(-1)
+    })
 
-    console.log(latestHappiness)
-
-    return latestHappiness[sensor]
+    return latestHappiness.at(-1)[sensor]
 }
 
 module.exports = getStatus

@@ -49,7 +49,7 @@ function SensorsBar() {
         <aside>
             {
                 sensors.map(el => { return (
-                    <button id={el.id} onClick={() => setFocus(el.id)}>
+                    <button id={el.id} key={el.id} onClick={() => setFocus(el.id)}>
                         { el.id === focus ? el.focusIcon : el.baseIcon }
                     </button>
                 )})
