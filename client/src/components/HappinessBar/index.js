@@ -20,10 +20,16 @@ function HappinessBar() {
         return ['Péssima', 'Triste', 'Regular', 'Feliz', 'Ótima'][level]
     }
 
-    function Happiness() {
-        this.overall = getStatus('overall');
-        this.level = getLevel(this.overall);
-        this.name = getName(this.level);
+    async function genHappiness() {
+        const overall = await getStatus('overall');
+        const level = getLevel(overall);
+        const name = getName(level);
+
+        return {
+            overall,
+            level,
+            name
+        }
     }
 
     function renderStatusLevels(happiness) {
@@ -36,7 +42,7 @@ function HappinessBar() {
         }
     }
 
-    const happiness = new Happiness();
+    const happiness = (async () => await genHappiness())();
 
     return (
         <div>

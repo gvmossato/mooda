@@ -4,11 +4,13 @@ const getHappiness = require("../api/getHappiness");
 async function getStatus(sensor) {
     const now = moment()
 
-    const latestHappiness = getHappiness({
+    const latestHappiness = await getHappiness({
         sensor,
-        startDate: now.subtract(20, 'minutes'),
-        endDate: now.add(1, 'days')
-    }).at(-1)
+        startDate: now.subtract(20, 'minutes').format("YYYY-MM-DD HH:mm:ss"),
+        endDate: now.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
+    })//.at(-1)
+
+    console.log(latestHappiness)
 
     return latestHappiness[sensor]
 }
