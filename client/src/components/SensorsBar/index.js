@@ -12,7 +12,7 @@ import "./styles.scoped.css";
 
 
 function SensorsBar() {
-
+    const { focus, setFocus } = useContext(FocusContext)
 
     const sensorsIcons = [
         {
@@ -47,14 +47,12 @@ function SensorsBar() {
         },
     ];
 
-    const { focus, setFocus } = useContext(FocusContext)
-
     return (
         <aside>
             {
                 sensorsIcons.map(el => { return (
-                    <button id={el.id} key={el.id} onClick={() => setFocus(el.id)}>
-                        { el.id === focus ? el.focusIcon : el.baseIcon }
+                    <button className={el.id + (focus === el.id ? " clicked" : "")} key={el.id} onClick={() => setFocus(el.id)}>
+                        <p>{ el.id === focus ? el.focusIcon : el.baseIcon }</p>
                     </button>
                 )})
             }

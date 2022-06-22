@@ -1,4 +1,52 @@
 aside {
     display: flex;
     flex-direction: column;
+    padding: 5px;
+    background-color: var(--color-box1);
+    border-radius: 15px;
+    justify-content: space-around;
+
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-box1);
+    cursor: pointer;
+    border: none;
+    height: 90px;
+    width: 60px;
+    border-radius: 15px;
+    padding: 2px;
+}
+
+p {
+    text-align: center;
+    font-size: 20pt;
+    margin: 0;
+}
+
+.clicked {
+    background-color: var(--color-box2);
+}
+
+.moisture {
+    color: var(--color-moisture);
+}
+
+.luminosity {
+    color: var(--color-luminosity);
+
+}.airQuality {
+    color: var(--color-airQuality);
+
+}.temperature {
+    color: var(--color-temperature);
+
+}.happiness {
+    color: var(--color-happiness);
+
+}.presence {
+    color: var(--color-presence);
 }
