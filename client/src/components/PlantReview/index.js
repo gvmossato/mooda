@@ -12,9 +12,7 @@ import "./styles.scoped.css";
 
 function PlantReview() {
 
-    const [status, setStatus] = useState(
-        new Array(5).fill([])
-    );
+    const [status, setStatus] = useState([]);
 
     const statusCallback = useCallback(
         async function buildStatus() {
