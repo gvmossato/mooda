@@ -31,8 +31,12 @@ p {
     background-color: var(--color-box2);
 }
 
-.moisture {
-    color: var(--color-moisture);
+.airMoisture {
+    color: var(--color-airMoisture);
+}
+
+.soilMoisture {
+    color: var(--color-soilMoisture);
 }
 
 .luminosity {

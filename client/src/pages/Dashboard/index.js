@@ -11,7 +11,7 @@ import './styles.scoped.css'
 
 
 export default function Dashboard() {
-    const [focus, setFocus] = useState("moisture")
+    const [focus, setFocus] = useState("soilMoisture")
 
     return(
         <main>

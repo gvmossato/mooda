@@ -9,7 +9,7 @@ module.exports = {
         const HappinessGet = handleHappinessGet(req.query)
 
         const sensor = HappinessGet.sensor ?? false
-        const startDate = HappinessGet.startDate ?? moment().subtract(1, 'years').format("YYYY-MM-DD HH:mm:ss");
+        const startDate = HappinessGet.startDate ?? moment().subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
         const endDate = moment(HappinessGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment().add(1, 'days').format("YYYY-MM-DD HH:mm:ss");
 
         const queryResult = await global.sequelize.models.Happiness.findAll({

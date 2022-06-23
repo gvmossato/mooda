@@ -9,8 +9,9 @@
 
     --color-luminosity: #FFF600;
     --color-temperature: #FF5C00;
-    --color-moisture: #00B2FF;
-    --color-airQuality: #8AD5FF;
+    --color-soilMoisture: #0099FF;
+    --color-airMoisture: #00EEFF;
+    --color-airQuality: #D0F7F7;
     --color-happiness: #FF67F0;
     --color-presence: #C870FF;
 

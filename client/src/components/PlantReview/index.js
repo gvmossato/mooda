@@ -18,9 +18,9 @@ function PlantReview() {
         async function buildStatus() {
             return [
                 {
-                    id: 'moisture',
-                    name: 'Umidade Solo & Ar',
-                    isFine: await getStatus('soilMoisture') && await getStatus('airMoisture')
+                    id: 'soilMoisture',
+                    name: 'Umidade do Solo',
+                    isFine: await getStatus('soilMoisture')
                 },
                 {
                     id: 'luminosity',
@@ -36,6 +36,11 @@ function PlantReview() {
                     id: 'temperature',
                     name: 'Temperatura',
                     isFine: await getStatus('temperature')
+                },
+                {
+                    id: 'airMoisture',
+                    name: 'Umidade do Ar',
+                    isFine: await getStatus('airMoisture')
                 },
             ]
         }, []

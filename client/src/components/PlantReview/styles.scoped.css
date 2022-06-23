@@ -73,8 +73,12 @@ p {
     color: var(--color-temperature);
 }
 
-.moisture {
-    color: var(--color-moisture);
+.soilMoisture {
+    color: var(--color-soilMoisture);
+}
+
+.airMoisture {
+    color: var(--color-airMoisture);
 }
 
 .airQuality {
