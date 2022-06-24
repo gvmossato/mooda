@@ -17,8 +17,6 @@ module.exports = {
             })
         )[0].date
 
-        console.log(lastDate)
-
         const sensor = HappinessGet.sensor ?? false
         const startDate = HappinessGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
         const endDate = moment(HappinessGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment(lastDate).format("YYYY-MM-DD HH:mm:ss");

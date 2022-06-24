@@ -75,23 +75,23 @@ module.exports = {
     handleIsFinePost(sensorPost) {
         return (
             _.transform(
-                _.omit(sensorPost, ['happiness', 'presence']), (result, value, key) => {
+                _.omit(sensorPost, ['presence']), (result, value, key) => {
                     result[key] = thresholds[key].min <= value && value <= thresholds[key].max
                 }
             )
         )
     },
 
-    async handleHappinessPost(date, validSensors) {
-        const isFineHistory = await global.sequelize.models.IsFine.findAll({
-            raw: true,
-            attributes: validSensors,
-            where: {
-                date: {
-                    [Op.gte]: date.subtract(24, 'hours')
-                }
-            }
-        });
+    async handleHappinessPost(validSensors) {
+        console.log(validSensors)
+        const isFineHistory = (
+            await global.sequelize.models.IsFine.findAll({
+                raw: true,
+                attributes: validSensors,
+                order: [['date', 'DESC']],
+                limit: 144, // 1 read per 10 min => 144 reads per day
+            })
+        )
 
         const fineAmount = _.reduce(isFineHistory, (result, value) => {
             return _.mergeWith(result, value, _.add)
