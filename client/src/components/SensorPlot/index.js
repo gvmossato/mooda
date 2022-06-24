@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { ThreeDots } from 'react-loader-spinner';
 import Chart from "react-apexcharts";
 
-import getPlotData from '../../utils/getPlotData'
+import getPlotData from '../../utils/getPlotData';
 import FocusContext from '../../contexts/FocusContext';
 
 import "./styles.scoped.css";
-
 
 
 function SensorPlot() {
@@ -14,16 +13,16 @@ function SensorPlot() {
 
     const [seriesData, setSeriesData] = useState([]);
 
-    const seriesCallback = useCallback(
-        async (focus, startDate, endDate) => {
-            setSeriesData([])
-            return await getPlotData(focus, startDate, endDate)
-        }, []
-    );
 
     useEffect(() => {
-        seriesCallback(focus, '2022-06-20', '2022-06-21').then(res => setSeriesData(res))
-    }, [seriesCallback, focus]);
+        async function fethapi(focus, startDate, endDate) {
+            setSeriesData([])
+            const res = await getPlotData(focus, startDate, endDate)
+            return setSeriesData(res)
+        }
+       fethapi(focus, '2022-06-20', '2022-06-21')
+
+    }, [focus]);
 
     const sensorsMaps = {
         airMoisture: {

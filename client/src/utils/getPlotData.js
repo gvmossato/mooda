@@ -1,11 +1,10 @@
-const getHappiness = require("../api/getHappiness");
-const getSensorData = require("../api/getSensorData");
+import getHappiness from "../api/getHappiness";
+import getSensorData from "../api/getSensorData";
+
 
 export default async function getPlotData(focus, startDate, endDate) {
-
     var data;
     var sensor;
-
     var series = [];
     var datetimes = [];
 

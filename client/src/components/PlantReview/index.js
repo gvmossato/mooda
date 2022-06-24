@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback  } from "react";
+import { useState, useEffect  } from "react";
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
 
 import getStatus from '../../utils/getStatus';
@@ -14,9 +14,10 @@ function PlantReview() {
 
     const [status, setStatus] = useState([]);
 
-    const statusCallback = useCallback(
-        async function buildStatus() {
-            return [
+
+    useEffect(() => {
+        async function fetchapi() {
+            const res = [
                 {
                     id: 'soilMoisture',
                     name: 'Umidade do Solo',
@@ -43,12 +44,11 @@ function PlantReview() {
                     isFine: await getStatus('airMoisture')
                 },
             ]
-        }, []
-    );
+            return setStatus(res)
+        }
+        fetchapi()
 
-    useEffect(() => {
-        statusCallback().then(res => setStatus(res))
-    }, [statusCallback]);
+    }, []);
 
     return (
         <aside>

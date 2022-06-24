@@ -1,5 +1,6 @@
-const moment = require("moment");
-const getHappiness = require("../api/getHappiness");
+import getHappiness from "../api/getHappiness";
+import moment from "moment";
+
 
 export default async function getStatus(sensor) {
     const now = moment()

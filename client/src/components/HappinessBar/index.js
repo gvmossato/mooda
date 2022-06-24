@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback  } from "react";
+import { useState, useEffect  } from "react";
 import { ThreeDots } from  'react-loader-spinner'
 
 import getStatus from "../../utils/getStatus";
@@ -22,23 +22,20 @@ function HappinessBar() {
 
     const [happiness, setHappiness] = useState({});
 
-    const happinessCallback = useCallback(
+    useEffect(() => {
         async function buildHappiness() {
             const overall = await getStatus('overall');
             const level = getHappinessLevel(overall);
             const name = getHappinessName(level);
 
-            return {
+            return setHappiness({
                 overall,
                 level,
                 name
-            }
-        }, []
-    );
-
-    useEffect(() => {
-        happinessCallback().then(res => setHappiness(res))
-    }, [happinessCallback]);
+            })
+        }
+        buildHappiness()
+    }, []);
 
     function renderStatusLevels(happiness) {
         var levelsBar = [];
