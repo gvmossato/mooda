@@ -1,7 +1,7 @@
 const getHappiness = require("../api/getHappiness");
 const getSensorData = require("../api/getSensorData");
 
-async function getPlotData(focus, startDate, endDate) {
+export default async function getPlotData(focus, startDate, endDate) {
 
     var data;
     var sensor;
@@ -24,5 +24,3 @@ async function getPlotData(focus, startDate, endDate) {
 
     return [series, datetimes]
 }
-
-module.exports = getPlotData

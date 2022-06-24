@@ -1,7 +1,7 @@
 const moment = require("moment");
 const getHappiness = require("../api/getHappiness");
 
-async function getStatus(sensor) {
+export default async function getStatus(sensor) {
     const now = moment()
 
     const latestHappiness = await getHappiness({
@@ -12,5 +12,3 @@ async function getStatus(sensor) {
 
     return latestHappiness.at(-1)[sensor]
 }
-
-module.exports = getStatus
