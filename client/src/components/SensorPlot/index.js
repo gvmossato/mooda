@@ -28,13 +28,13 @@ function SensorPlot() {
     const sensorsMaps = {
         airMoisture: {
             id: 'airMoisture',
-            name: 'Humidade do Ar',
+            name: 'Umidade do Ar',
             color: '#00EEFF',
             unit: '%'
         },
         soilMoisture: {
             id: 'soilMoisture',
-            name: 'Humidade do Solo',
+            name: 'Umidade do Solo',
             color: '#0099FF',
             unit: '%'
         },
