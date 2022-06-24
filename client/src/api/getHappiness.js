@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-async function getHappiness(params) {
+export default async function getHappiness(params) {
     const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api/happiness' : 'https://mood-a.herokuapp.com/api/happiness'
     const query = '?' + new URLSearchParams(params).toString()
     const options = { headers: { "Content-Type": 'text/plain' } }
@@ -14,5 +14,3 @@ async function getHappiness(params) {
 
     return res.data
 }
-
-module.exports = getHappiness
