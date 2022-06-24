@@ -7,6 +7,7 @@ const sequelize = require('../database/models/models');
 const router = require('./routes');
 
 global.sequelize = sequelize
+global.dateFormat = "YYYY-MM-DD HH:mm:ss"
 
 const app = express();
 const PORT = process.env.PORT || process.env.SERVER_PORT;

@@ -2,6 +2,8 @@ const _ = require('lodash')
 const { Op } = require("sequelize");
 const moment = require('moment')
 
+const { formatDate } = require('../utils/format')
+
 const {
     handleSensorsGet,
     handleSensorsPost,
@@ -28,11 +30,11 @@ module.exports = {
             })
         )
 
-        const lastDate = lastRecord.date
+        const lastDate = formatDate(lastRecord?.date) ?? moment()
+        const startDate = formatDate(sensorsGet.startDate) ?? formatDate(lastDate).subtract(1, 'days')
+        const endDate = formatDate(sensorsGet.endDate)?.add(1, 'days') ?? formatDate(lastDate)
 
         const sensor = sensorsGet.sensor ?? false
-        const startDate = sensorsGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
-        const endDate = moment(sensorsGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment(lastDate).format("YYYY-MM-DD HH:mm:ss");
 
         const queryResult = await global.sequelize.models.Sensors.findAll({
             raw: true,
@@ -51,7 +53,7 @@ module.exports = {
     },
 
     async create(req, res) {
-        const date = moment().format("YYYY-MM-DD HH:mm:ss")
+        const date = formatDate(moment())
 
         const sensorsPost = handleSensorsPost(req.body, validSensors)
 

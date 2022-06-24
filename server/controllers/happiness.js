@@ -2,11 +2,13 @@ const _ = require('lodash')
 const { Op } = require("sequelize");
 const moment = require('moment')
 
+const { formatDate } = require('../utils/format')
+
 const { handleHappinessGet } = require('../../database/handlers')
 
 module.exports = {
     async read(req, res) {
-        const HappinessGet = handleHappinessGet(req.query)
+        const happinessGet = handleHappinessGet(req.query)
 
         const [lastRecord] = (
             await global.sequelize.models.Happiness.findAll({
@@ -16,12 +18,10 @@ module.exports = {
                 limit: 1,
             })
         )
-
-        const lastDate = lastRecord.date
-
-        const sensor = HappinessGet.sensor ?? false
-        const startDate = HappinessGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
-        const endDate = moment(HappinessGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment(lastDate).format("YYYY-MM-DD HH:mm:ss");
+        const lastDate = formatDate(lastRecord?.date) ?? moment()
+        const startDate = formatDate(happinessGet.startDate) ?? formatDate(lastDate).subtract(1, 'days')
+        const endDate = formatDate(happinessGet.endDate)?.add(1, 'days') ?? formatDate(lastDate)
+        const sensor = happinessGet.sensor ?? false
 
         const queryResult = await global.sequelize.models.Happiness.findAll({
             raw: true,
