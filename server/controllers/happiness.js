@@ -8,14 +8,16 @@ module.exports = {
     async read(req, res) {
         const HappinessGet = handleHappinessGet(req.query)
 
-        const lastDate = (
+        const [lastRecord] = (
             await global.sequelize.models.Happiness.findAll({
                 raw: true,
                 attributes: ['date'],
                 order: [['date', 'DESC']],
                 limit: 1,
             })
-        )[0].date
+        )
+
+        const lastDate = lastRecord.date
 
         const sensor = HappinessGet.sensor ?? false
         const startDate = HappinessGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
