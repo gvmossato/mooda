@@ -19,9 +19,18 @@ module.exports = {
     async read(req, res) {
         const sensorsGet = handleSensorsGet(req.query, validSensors)
 
+        const lastDate = (
+            await global.sequelize.models.Sensors.findAll({
+                raw: true,
+                attributes: ['date'],
+                order: [['date', 'DESC']],
+                limit: 1,
+            })
+        )[0].date
+
         const sensor = sensorsGet.sensor ?? false
-        const startDate = sensorsGet.startDate ?? moment().subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
-        const endDate = moment(sensorsGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment().add(1, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const startDate = sensorsGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const endDate = moment(sensorsGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment(lastDate).format("YYYY-MM-DD HH:mm:ss");
 
         const queryResult = await global.sequelize.models.Sensors.findAll({
             raw: true,

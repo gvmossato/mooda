@@ -8,9 +8,20 @@ module.exports = {
     async read(req, res) {
         const HappinessGet = handleHappinessGet(req.query)
 
+        const lastDate = (
+            await global.sequelize.models.Happiness.findAll({
+                raw: true,
+                attributes: ['date'],
+                order: [['date', 'DESC']],
+                limit: 1,
+            })
+        )[0].date
+
+        console.log(lastDate)
+
         const sensor = HappinessGet.sensor ?? false
-        const startDate = HappinessGet.startDate ?? moment().subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
-        const endDate = moment(HappinessGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment().add(1, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const startDate = HappinessGet.startDate ?? moment(lastDate).subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const endDate = moment(HappinessGet.endDate).add(1, 'days').format("YYYY-MM-DD HH:mm:ss") ?? moment(lastDate).format("YYYY-MM-DD HH:mm:ss");
 
         const queryResult = await global.sequelize.models.Happiness.findAll({
             raw: true,
