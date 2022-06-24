@@ -27,36 +27,43 @@ function SensorPlot() {
 
     const sensorsMaps = {
         airMoisture: {
+            id: 'airMoisture',
             name: 'Humidade do Ar',
             color: '#00EEFF',
             unit: '%'
         },
         soilMoisture: {
+            id: 'soilMoisture',
             name: 'Humidade do Solo',
             color: '#0099FF',
             unit: '%'
         },
         luminosity: {
+            id: 'luminosity',
             name: 'Luminosidade',
             color: '#FFF600',
             unit: 'lúmen'
         },
         temperature: {
+            id: 'temperature',
             name: 'Temperatura',
             color: '#FF5C00',
             unit: '°C'
         },
         airQuality: {
+            id: 'airQuality',
             name: 'Qualidade do Ar',
             color: '#D0F7F7',
             unit: 'ppm CO₂'
         },
         happiness: {
+            id: 'happiness',
             name: 'Felicidade',
             color: '#FF67F0',
             unit: ''
         },
         presence: {
+            id: 'presence',
             name: 'Presença',
             color: '#C870FF',
             unit: ''
@@ -75,10 +82,16 @@ function SensorPlot() {
         },
         xaxis: {
             type: 'datetime',
-            categories: seriesData[1]
+            categories: seriesData[1],
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
         },
         yaxis: {
-            decimalsInFloat: 0,
+            decimalsInFloat: 2,
 
         },
         title: {
@@ -86,10 +99,9 @@ function SensorPlot() {
             style: {
                 color: sensorsMaps[focus].color,
             },
-
         },
         grid: {
-            borderColor: '#1E1E1E',
+            borderColor: '#171717',
             strokeDashArray: 5,
         },
         curve: 'smooth',
@@ -135,17 +147,16 @@ function SensorPlot() {
 
     return (
         <section>
-            <h1>
+            <h1 className={"text-title " + sensorsMaps[focus].id}>
                 { sensorsMaps[focus].name }
             </h1>
-            {
-                seriesData.length ?
-                <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
-                :
-                <ThreeDots />
-            }
-            <div>
-
+            <div className="graph">
+                {
+                    seriesData.length ?
+                    <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
+                    :
+                    <ThreeDots />
+                }
             </div>
         </section>
     );

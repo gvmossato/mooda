@@ -1,0 +1,38 @@
+section {
+    background-color: var(--color-box1);
+    padding: 1px 10px 10px 10px;
+    border-radius: 15px;
+    margin: 10px;
+    min-width: 650px;
+    min-height: 400px;
+}
+
+h1 {
+    font-size: 22pt;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.luminosity {
+    color: var(--color-luminosity);
+}
+
+.temperature {
+    color: var(--color-temperature);
+}
+
+.soilMoisture {
+    color: var(--color-soilMoisture);
+}
+
+.airMoisture {
+    color: var(--color-airMoisture);
+}
+
+.airQuality {
+    color: var(--color-airQuality);
+}
+
+.luminosity {
+    color: var(--color-luminosity);
+}

@@ -9,8 +9,6 @@ async function getPlotData(focus, startDate, endDate) {
     var series = [];
     var datetimes = [];
 
-    console.log(focus)
-
     if (focus === 'happiness') {
         sensor = 'overall'
         data = await getHappiness({ sensor, startDate, endDate })
