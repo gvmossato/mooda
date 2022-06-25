@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { ThreeDots } from 'react-loader-spinner';
-import Chart from "react-apexcharts";
-
+import { formatDate } from '../../utils/format'
 import getPlotData from '../../utils/getPlotData';
+
+import Chart from "react-apexcharts";
 import FocusContext from '../../contexts/FocusContext';
+import DatePicker from '../DatePicker'
 
 import "./styles.scoped.css";
 
@@ -12,17 +14,27 @@ function SensorPlot() {
     const { focus } = useContext(FocusContext)
 
     const [seriesData, setSeriesData] = useState([]);
-
+    const [startDate, setStartDate] = useState(formatDate());
+    const [endDate, setEndDate] = useState(formatDate());
 
     useEffect(() => {
-        async function fethapi(focus, startDate, endDate) {
+        async function requestData(focus, startDate, endDate) {
             setSeriesData([])
             const res = await getPlotData(focus, startDate, endDate)
-            return setSeriesData(res)
+            setSeriesData(res)
+            return
         }
-       fethapi(focus, '2022-06-20', '2022-06-21')
 
-    }, [focus]);
+        requestData(focus, startDate, endDate)
+    }, [focus, startDate, endDate]);
+
+    function handleStartDateChange(event) {
+        setStartDate(formatDate(event.target.value))
+    }
+
+    function handleEndDateChange(event) {
+        setEndDate(formatDate(event.target.value))
+    }
 
     const sensorsMaps = {
         airMoisture: {
@@ -146,9 +158,15 @@ function SensorPlot() {
 
     return (
         <section>
-            <h1 className={"text-title " + sensorsMaps[focus].id}>
-                { sensorsMaps[focus].name }
-            </h1>
+            <div>
+                <h1 className={"text-title " + sensorsMaps[focus].id}>
+                    { sensorsMaps[focus].name }
+                </h1>
+                <div>
+                    <DatePicker onChange={handleStartDateChange} value={startDate} />
+                    <DatePicker onChange={handleEndDateChange} value={endDate} />
+                </div>
+            </div>
             <div className="graph">
                 {
                     seriesData.length ?

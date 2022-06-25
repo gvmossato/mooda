@@ -11,13 +11,11 @@ import "./styles.scoped.css";
 
 
 function PlantReview() {
-
     const [status, setStatus] = useState([]);
 
-
     useEffect(() => {
-        async function fetchapi() {
-            const res = [
+        async function requestData() {
+            const status = [
                 {
                     id: 'soilMoisture',
                     name: 'Umidade do Solo',
@@ -44,10 +42,10 @@ function PlantReview() {
                     isFine: await getStatus('airMoisture')
                 },
             ]
-            return setStatus(res)
+            return setStatus(status);
         }
-        fetchapi()
 
+        requestData();
     }, []);
 
     return (
