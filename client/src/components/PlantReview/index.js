@@ -1,5 +1,6 @@
 import { useState, useEffect  } from "react";
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
+import { TailSpin } from  'react-loader-spinner'
 
 import getStatus from '../../utils/getStatus';
 import moodaLogo from '../../assets/mooda.png'
@@ -8,7 +9,7 @@ import plant from '../../assets/plant.png'
 import HappinessBar from '../HappinessBar';
 
 import "./styles.scoped.css";
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function PlantReview() {
     const [status, setStatus] = useState([]);
@@ -60,6 +61,7 @@ function PlantReview() {
 
                 <div className="status-collection">
                     {
+                        status.length ?
                         status.map(el => {
                             return (
                                 <div className={"status " + el.id} key={el.id}>
@@ -70,6 +72,10 @@ function PlantReview() {
                                 </div>
                             )
                         })
+                        :
+                        <div className="loading-box">
+                            <TailSpin color="#636363" height={80} width={40} />
+                        </div>
                     }
                 </div>
             </div>

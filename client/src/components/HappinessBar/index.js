@@ -57,24 +57,23 @@ function HappinessBar() {
     }
 
     return (
-        <div>
-            <h2 className={"text-title name-level" + happiness.level}>
-                {
-                    !happiness.name ?
-                        <ThreeDots color="#00BBFF" height={20} width={20} />
-                        :
-                        happiness.name
-                }
-            </h2>
-            <div className="happiness-bar">
-                {
-                    !happiness.name ?
-                        <ThreeDots color="#00BBFF" height={20} width={20} />
-                        :
-                        renderStatusLevels(happiness)
-                }
-            </div>
-        </div>
+        <section>
+            {
+                happiness.name ?
+                    <div>
+                        <h2 className={"text-title name-level" + happiness.level}>
+                            { happiness.name }
+                        </h2>
+                        <div className="happiness-bar">
+                            { renderStatusLevels(happiness) }
+                        </div>
+                    </div>
+                    :
+                    <div className="loading-box">
+                        <ThreeDots color="#636363" height={20} width={20} />
+                    </div>
+            }
+        </section>
     );
 }
 

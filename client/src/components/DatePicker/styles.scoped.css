@@ -6,6 +6,7 @@ input {
     outline: none;
     color: var(--color-font);
     width: 125px;
+    color-scheme: dark;
 }
 
 ::-webkit-datetime-edit {

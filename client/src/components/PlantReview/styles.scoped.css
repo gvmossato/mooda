@@ -8,6 +8,12 @@ img[alt='mooda-logo'] {
     margin: 20px auto;
 }
 
+.plant-review {
+    padding-bottom: 10px;
+    background-color: var(--color-box1);
+    border-radius: 15px;
+}
+
 .plant-frame {
     width: 100%;
     height: 250px;
@@ -25,14 +31,13 @@ img[alt='plant'] {
     margin: 20px auto;
 }
 
-.plant-review {
-    padding-bottom: 10px;
-    background-color: var(--color-box1);
-    border-radius: 15px;
-}
-
 .status-collection {
     margin-top: 20px;
+}
+
+.loading-box {
+    display: flex;
+    justify-content: center;
 }
 
 .status {
@@ -63,28 +68,4 @@ p {
 
 .cross {
     color: var(--color-bad);
-}
-
-.luminosity {
-    color: var(--color-luminosity);
-}
-
-.temperature {
-    color: var(--color-temperature);
-}
-
-.soilMoisture {
-    color: var(--color-soilMoisture);
-}
-
-.airMoisture {
-    color: var(--color-airMoisture);
-}
-
-.airQuality {
-    color: var(--color-airQuality);
-}
-
-.luminosity {
-    color: var(--color-luminosity);
 }
