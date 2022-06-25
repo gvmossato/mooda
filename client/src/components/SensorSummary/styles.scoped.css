@@ -1,0 +1,38 @@
+section {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+h3 {
+    margin: 0;
+}
+
+.period-box {
+    background-color: var(--color-box1);
+    border-radius: 15px;
+    width: 200px;
+    padding: 10px;
+}
+
+.period-metric {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-box2);
+    border-radius: 100px;
+    padding: 4px 8px;
+    margin: 8px 0;
+}
+
+p {
+    margin: 0;
+    font-size: 11pt;
+}
+
+.good {
+    color: var(--color-good);
+}
+
+.bad {
+    color: var(--color-bad);
+}

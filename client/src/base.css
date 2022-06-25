@@ -30,3 +30,27 @@ body {
     font-family: Montserrat, Helvetica, sans-serif;
     text-align: center;
 }
+
+.luminosity {
+    color: var(--color-luminosity);
+}
+
+.temperature {
+    color: var(--color-temperature);
+}
+
+.soilMoisture {
+    color: var(--color-soilMoisture);
+}
+
+.airMoisture {
+    color: var(--color-airMoisture);
+}
+
+.airQuality {
+    color: var(--color-airQuality);
+}
+
+.luminosity {
+    color: var(--color-luminosity);
+}
