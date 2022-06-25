@@ -158,12 +158,14 @@ function SensorPlot() {
 
     return (
         <section>
-            <div>
+            <div className="title-box">
                 <h1 className={"text-title " + sensorsMaps[focus].id}>
                     { sensorsMaps[focus].name }
                 </h1>
-                <div>
+                <div className="date-box">
+                    <p>De:</p>
                     <DatePicker onChange={handleStartDateChange} value={startDate} />
+                    <p>Até:</p>
                     <DatePicker onChange={handleEndDateChange} value={endDate} />
                 </div>
             </div>

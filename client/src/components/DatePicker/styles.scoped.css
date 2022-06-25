@@ -1,0 +1,24 @@
+input {
+    font-family: Nunito, Helvetica, sans-serif;
+    background-color: var(--color-box2);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: var(--color-font);
+    width: 125px;
+}
+
+::-webkit-datetime-edit {
+    padding: 8px;
+}
+
+::-webkit-calendar-picker-indicator {
+    margin-right: 5px;
+    filter:
+        invert(35%)
+        sepia(55%)
+        saturate(0%)
+        hue-rotate(285deg)
+        brightness(95%)
+        contrast(92%);
+}
