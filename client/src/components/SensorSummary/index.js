@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { ThreeDots } from 'react-loader-spinner';
+import { TailSpin, ThreeDots } from 'react-loader-spinner';
 import getMetrics from '../../utils/getMetrics';
 
 import FocusContext from '../../contexts/FocusContext';
@@ -10,9 +10,7 @@ import "./styles.scoped.css";
 function SensorSummary() {
     const { focus } = useContext(FocusContext);
 
-    const [dayMetrics, setDayMetrics] = useState({});
-    const [monthMetrics, setMonthMetrics] = useState({});
-    const [yearMetrics, setYearMetrics] = useState({});
+    const [periodMetrics, setPeriodMetrics] = useState([]);
 
     function getGradeClassName (focus, value) {
         const thresholds = {
@@ -54,13 +52,11 @@ function SensorSummary() {
 
     useEffect(() => {
         async function requestData(focus) {
-            const resDay = await getMetrics(focus, 'days')
-            const resMonth = await getMetrics(focus, 'months')
-            const resYear = await getMetrics(focus, 'years')
+            const days = await getMetrics(focus, 'days')
+            const months = await getMetrics(focus, 'months')
+            const years = await getMetrics(focus, 'years')
 
-            setDayMetrics(resDay)
-            setMonthMetrics(resMonth)
-            setYearMetrics(resYear)
+            setPeriodMetrics([days, months, years])
             return
         }
 
@@ -71,9 +67,10 @@ function SensorSummary() {
     return (
         <section>
             {
-                [dayMetrics, monthMetrics, yearMetrics].map((el) => {
-                    return (
-                        <div className="period-box" key={el.name}>
+                periodMetrics.length ?
+                    periodMetrics.map((el) => (
+                        <div key={el.name} className="period-box">
+                            {console.log(el.name)}
                             <h3 className={"text-title " + focus}>{el.name}</h3>
                             <div className="period-metric">
                                 <p>Máximo:</p>
@@ -88,8 +85,9 @@ function SensorSummary() {
                                 <p className={getGradeClassName(focus, el.min)}>{el.min ?? <ThreeDots />}</p>
                             </div>
                         </div>
-                    )
-                })
+                    ))
+                :
+                    <TailSpin color="#636363" height={200} width={100} />
             }
         </section>
     );

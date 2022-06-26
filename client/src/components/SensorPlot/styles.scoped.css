@@ -27,3 +27,9 @@ p {
     margin-right: 10px;
     margin-left: 15px;
 }
+
+.loading-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

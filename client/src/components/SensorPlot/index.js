@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { ThreeDots } from 'react-loader-spinner';
+import { TailSpin } from  'react-loader-spinner'
 import { formatDate } from '../../utils/format'
 import getPlotData from '../../utils/getPlotData';
 
@@ -7,6 +7,7 @@ import Chart from "react-apexcharts";
 import FocusContext from '../../contexts/FocusContext';
 import DatePicker from '../DatePicker'
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "./styles.scoped.css";
 
 
@@ -21,7 +22,7 @@ function SensorPlot() {
         async function requestData(focus, startDate, endDate) {
             setSeriesData([])
             const res = await getPlotData(focus, startDate, endDate)
-            setSeriesData(res)
+            setTimeout(() => setSeriesData(res), 500)
             return
         }
 
@@ -172,9 +173,11 @@ function SensorPlot() {
             <div className="graph">
                 {
                     seriesData.length ?
-                    <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
+                        <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
                     :
-                    <ThreeDots />
+                        <div className="loading-box">
+                            <TailSpin color="#636363" height={200} width={100} />
+                        </div>
                 }
             </div>
         </section>
