@@ -17,7 +17,7 @@ export default async function getPlotData(focus, startDate, endDate) {
     }
 
     data.forEach((value) => {
-        series.push(value[sensor])
+        series.push(Number(value[sensor]))
         datetimes.push(value.date)
     })
 
