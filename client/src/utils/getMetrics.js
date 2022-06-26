@@ -38,8 +38,8 @@ export default async function getMetrics(focus, period) {
 
     return {
         period,
-        max: max.toFixed(2) ?? max,
-        mean: (mean / data.length).toFixed(2) ?? (mean / data.length),
-        min: min.toFixed(2) ?? min
+        max:  parseFloat(Number(max).toFixed(2)),
+        mean: parseFloat(Number(mean / data.length).toFixed(2)),
+        min:  parseFloat(Number(min).toFixed(2))
     }
 }
