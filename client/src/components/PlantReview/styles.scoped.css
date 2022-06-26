@@ -3,7 +3,6 @@ aside {
     flex-direction: column;
     width: 21%;
     height: 100%;
-    background-color: blue;
 }
 
 img[alt='mooda-logo'] {

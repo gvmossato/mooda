@@ -12,7 +12,7 @@ h3 {
     background-color: var(--color-box1);
     border-radius: 15px;
     flex-grow: 1;
-    padding: 10px;
+    padding: 20px;
 }
 
 .period-metric {

@@ -29,7 +29,6 @@ html, body, #root {
     font-family: Nunito, Arial, sans-serif;
     color: var(--color-font);
     background-color: var(--color-background);
-    background-color: red;
 }
 
 .text-title {
@@ -60,4 +59,12 @@ html, body, #root {
 
 .luminosity {
     color: var(--color-luminosity);
+}
+
+.presence {
+    color: var(--color-presence);
+}
+
+.happiness {
+    color: var(--color-happiness);
 }
