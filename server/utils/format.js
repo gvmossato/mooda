@@ -1,8 +1,11 @@
-const moment = require('moment')
+const moment = require('moment-timezone')
 const _ = require('lodash')
 
 module.exports = {
-    formatDate(date) {
-        return _.isNil(date) ? null : moment(date, global.dateFormat)
+    getNowDate() {
+        return moment.tz(moment(), global.dateFormat, global.timeZone)
     },
+    formatDate(date) {
+        return date.format(global.dateFormat)
+    }
 }

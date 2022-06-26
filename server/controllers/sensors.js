@@ -1,8 +1,7 @@
 const _ = require('lodash')
 const { Op } = require("sequelize");
-const moment = require('moment')
 
-const { formatDate } = require('../utils/format')
+const { formatDate, getNowDate } = require('../utils/format')
 
 const {
     handleSensorsGet,
@@ -21,18 +20,9 @@ module.exports = {
     async read(req, res) {
         const sensorsGet = handleSensorsGet(req.query, validSensors)
 
-        const [lastRecord] = (
-            await global.sequelize.models.Sensors.findAll({
-                raw: true,
-                attributes: ['date'],
-                order: [['date', 'DESC']],
-                limit: 1,
-            })
-        )
-
-        const lastDate = formatDate(lastRecord?.date) ?? moment()
-        const startDate = formatDate(sensorsGet.startDate) ?? formatDate(lastDate).subtract(1, 'days')
-        const endDate = formatDate(sensorsGet.endDate)?.add(1, 'days') ?? formatDate(lastDate)
+        const now = getNowDate()
+        const startDate = sensorsGet.startDate ?? formatDate(now.clone().subtract(1, 'days'))
+        const endDate = sensorsGet.endDate ?? formatDate(now.clone())
 
         const sensor = sensorsGet.sensor ?? false
 
@@ -53,7 +43,8 @@ module.exports = {
     },
 
     async create(req, res) {
-        const date = formatDate(moment())
+        const now = getNowDate()
+        console.log(formatDate(now))
 
         const sensorsPost = handleSensorsPost(req.body, validSensors)
 
@@ -63,17 +54,17 @@ module.exports = {
         }
 
         const sensorsSaved = await global.sequelize.models.Sensors.create(
-            { ...sensorsPost, date }
+            { ...sensorsPost, date: formatDate(now) }
         )
 
         const isFinePost = handleIsFinePost(sensorsPost)
         const isFineSaved = await global.sequelize.models.IsFine.create(
-            { ...isFinePost, date }
+            { ...isFinePost, date: formatDate(now) }
         )
 
-        const happinessPost = await handleHappinessPost(date, _.difference(validSensors, ['presence']))
+        const happinessPost = await handleHappinessPost(now, _.difference(validSensors, ['presence']))
         const happinessSaved = await global.sequelize.models.Happiness.create(
-            { ...happinessPost, date }
+            { ...happinessPost, date: formatDate(now) }
         )
 
         return res.status(200).json([sensorsSaved, isFineSaved, happinessSaved]);

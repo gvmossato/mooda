@@ -2,6 +2,8 @@ const _ = require('lodash')
 const { Op } = require("sequelize");
 const moment = require('moment')
 
+const { formatDate } = require('../server/utils/format')
+
 const { thresholds, weights } = require('./constants')
 
 
@@ -82,13 +84,13 @@ module.exports = {
         )
     },
 
-    async handleHappinessPost(date, validSensors) {
+    async handleHappinessPost(now, validSensors) {
         const isFineHistory = await global.sequelize.models.IsFine.findAll({
             raw: true,
             attributes: validSensors,
             where: {
                 date: {
-                    [Op.gte]: date.subtract(24, 'hours')
+                    [Op.gte]: formatDate(now.clone().subtract(24, 'hours'))
                 }
             }
         });

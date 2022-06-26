@@ -1,8 +1,7 @@
-import moment from "moment";
 import getHappiness from "../api/getHappiness";
 import getSensorData from "../api/getSensorData";
 
-import { formatDate } from "../utils/format";
+import { formatDate, getNowDate } from "../utils/format";
 
 
 export default async function getMetrics(focus, period) {
@@ -16,9 +15,9 @@ export default async function getMetrics(focus, period) {
     let mean = 0;
     let min = Infinity;
 
-    const now = moment();
-    const endDate = formatDate(now)
-    const startDate = formatDate(now.subtract(1, period))
+    const now = getNowDate()
+    const endDate = formatDate(now, 'server')
+    const startDate = formatDate(now.clone().subtract(1, period), 'server')
 
     if (focus === 'happiness') {
         sensor = 'overall'

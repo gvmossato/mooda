@@ -8,6 +8,7 @@ const router = require('./routes');
 
 global.sequelize = sequelize
 global.dateFormat = "YYYY-MM-DD HH:mm:ss"
+global.timeZone = "America/Sao_Paulo"
 
 const app = express();
 const PORT = process.env.PORT || process.env.SERVER_PORT;

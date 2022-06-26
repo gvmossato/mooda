@@ -1,17 +1,17 @@
 import getHappiness from "../api/getHappiness";
-import { formatDate } from "./format";
-import moment from "moment";
+import { formatDate, getNowDate } from "./format";
 
 
 export default async function getStatus(sensor) {
-    const now = moment()
+    const now = getNowDate()
+    const past = now.clone().subtract(1, 'days') // Any read within 24h is valid for status
 
     const latestHappiness = await getHappiness({
         sensor,
-        startDate: formatDate(now.subtract(20, 'minutes')),
-        endDate: formatDate(now.add(1, 'days'))
+        startDate: formatDate(past, 'server'),
+        endDate: formatDate(now, 'server')
     })
 
-    if (!latestHappiness.length) return false
+    if (!latestHappiness.length) return false // No read within 24h => bad
     return latestHappiness.at(-1)[sensor]
 }

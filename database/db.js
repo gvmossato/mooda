@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'development') {
     var sequelize = new Sequelize({
         dialect: 'sqlite',
-        storage: './db.sqlite'
+        storage: './db.sqlite',
     });
 } else {
     var sequelize = new Sequelize(
@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === 'development') {
         {
             dialect: 'postgres',
             dialectOptions: {
+                useUTC: false,
                 ssl: {
                     require: true,
                     rejectUnauthorized: false

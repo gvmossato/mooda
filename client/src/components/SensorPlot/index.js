@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { TailSpin } from  'react-loader-spinner'
-import { formatDate } from '../../utils/format'
+import { formatDate, getNowDate } from '../../utils/format'
 import getPlotData from '../../utils/getPlotData';
 
 import Chart from "react-apexcharts";
@@ -14,9 +14,12 @@ import "./styles.scoped.css";
 function SensorPlot() {
     const { focus } = useContext(FocusContext)
 
+    const now = getNowDate()
+    const yesterday = now.clone().subtract(1, 'days')
+
     const [seriesData, setSeriesData] = useState([]);
-    const [startDate, setStartDate] = useState(formatDate());
-    const [endDate, setEndDate] = useState(formatDate());
+    const [startDate, setStartDate] = useState(formatDate(yesterday, 'client'));
+    const [endDate, setEndDate] = useState(formatDate(now, 'client'));
 
     useEffect(() => {
         async function requestData(focus, startDate, endDate) {
@@ -30,11 +33,11 @@ function SensorPlot() {
     }, [focus, startDate, endDate]);
 
     function handleStartDateChange(event) {
-        setStartDate(formatDate(event.target.value))
+        setStartDate(event.target.value)
     }
 
     function handleEndDateChange(event) {
-        setEndDate(formatDate(event.target.value))
+        setEndDate(event.target.value)
     }
 
     const sensorsMaps = {
@@ -134,7 +137,7 @@ function SensorPlot() {
         tooltip: {
             x: {
                 show: true,
-                format: 'dd/MM/yyyy HH:mm:ss',
+                format: 'yyyy/MM/dd HH:mm:ss',
                 formatter: undefined,
             },
             followCursor: true,

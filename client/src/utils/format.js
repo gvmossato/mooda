@@ -1,5 +1,14 @@
-import moment from 'moment'
+import moment from 'moment-timezone'
 
-export function formatDate(date=undefined) {
-    return moment(date).format("yyyy-MM-DD")
+export function getNowDate() {
+    return moment.tz(moment(), global.dateFormatServer, global.timeZone)
+}
+
+export function formatDate(date, which) {
+    if (!['server', 'client'].includes(which)) {
+        throw Error(`\`which\` expects 'server' or 'client' not ${which}`)
+    }
+
+    const format = which === 'client' ? global.dateFormatClient : global.dateFormatServer
+    return date.format(format)
 }
