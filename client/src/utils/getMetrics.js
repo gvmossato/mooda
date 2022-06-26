@@ -10,12 +10,6 @@ export default async function getMetrics(focus, period) {
         throw Error(`\`period\` expects 'years', 'months' or 'days', not ${period}`)
     }
 
-    const namesMap = {
-        'years': 'Ano',
-        'months': 'Mês',
-        'days': 'Dia',
-    }
-
     var data;
     var sensor;
     let max = -Infinity;
@@ -34,6 +28,8 @@ export default async function getMetrics(focus, period) {
         data = await getSensorData({ sensor, startDate, endDate })
     }
 
+    if (!data.length) return { period, max: 0 , mean: 0, min: 0 }
+
     data.forEach((el) => {
         if (el[sensor] < min) min = el[sensor];
         if (el[sensor] > max) max = el[sensor];
@@ -41,9 +37,10 @@ export default async function getMetrics(focus, period) {
         mean += el[sensor]
     })
 
-    min = min.toFixed(2);
-    mean = (mean / data.length).toFixed(2);
-    max = max.toFixed(2);
-
-    return { period, name: namesMap[period], max, mean, min }
+    return {
+        period,
+        max: max.toFixed(2),
+        mean: (mean / data.length).toFixed(2),
+        min: min.toFixed(2)
+    }
 }

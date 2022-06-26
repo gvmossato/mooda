@@ -40,3 +40,9 @@ p {
 .months {
     margin: 0 20px;
 }
+
+.loading-box {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}

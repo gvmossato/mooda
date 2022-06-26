@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { TailSpin, ThreeDots } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
 import getMetrics from '../../utils/getMetrics';
 
 import FocusContext from '../../contexts/FocusContext';
@@ -11,6 +11,12 @@ function SensorSummary() {
     const { focus } = useContext(FocusContext);
 
     const [periodMetrics, setPeriodMetrics] = useState([]);
+
+    const namesMap = {
+        'years': 'Ano',
+        'months': 'Mês',
+        'days': 'Dia',
+    }
 
     function getGradeClassName (focus, value) {
         const thresholds = {
@@ -70,23 +76,25 @@ function SensorSummary() {
                 periodMetrics.length ?
                     periodMetrics.map((el) => (
                         <div key={el.period} className={"period-box " + el.period}>
-                            <h3 className={"text-title " + focus}>{el.name}</h3>
+                            <h3 className={"text-title " + focus}>{namesMap[el.period]}</h3>
                             <div className="period-metric">
                                 <p>Máximo:</p>
-                                <p className={getGradeClassName(focus, el.max)}>{el.max ?? <ThreeDots />}</p>
+                                <p className={getGradeClassName(focus, el.max)}>{el.max}</p>
                             </div>
                             <div className="period-metric">
                                 <p>Média:</p>
-                                <p className={getGradeClassName(focus, el.mean)}>{el.mean ?? <ThreeDots />}</p>
+                                <p className={getGradeClassName(focus, el.mean)}>{el.mean}</p>
                             </div>
                             <div className="period-metric">
                                 <p>Mínimo:</p>
-                                <p className={getGradeClassName(focus, el.min)}>{el.min ?? <ThreeDots />}</p>
+                                <p className={getGradeClassName(focus, el.min)}>{el.min}</p>
                             </div>
                         </div>
                     ))
                 :
-                    <TailSpin color="#636363" height={200} width={100} />
+                    <div className="loading-box">
+                        <TailSpin color="#636363" height={200} width={100} />
+                    </div>
             }
         </section>
     );
