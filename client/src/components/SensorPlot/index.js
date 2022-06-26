@@ -173,7 +173,7 @@ function SensorPlot() {
             <div className="graph">
                 {
                     seriesData.length ?
-                        <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
+                        <Chart options={plotOptions} series={plotData} type="area" height="380" width="800" />
                     :
                         <div className="loading-box">
                             <TailSpin color="#636363" height={100} width={100} />

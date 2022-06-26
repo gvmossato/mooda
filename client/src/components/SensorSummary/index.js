@@ -69,8 +69,7 @@ function SensorSummary() {
             {
                 periodMetrics.length ?
                     periodMetrics.map((el) => (
-                        <div key={el.name} className="period-box">
-                            {console.log(el.name)}
+                        <div key={el.period} className={"period-box " + el.period}>
                             <h3 className={"text-title " + focus}>{el.name}</h3>
                             <div className="period-metric">
                                 <p>Máximo:</p>

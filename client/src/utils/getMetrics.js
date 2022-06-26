@@ -45,5 +45,5 @@ export default async function getMetrics(focus, period) {
     mean = (mean / data.length).toFixed(2);
     max = max.toFixed(2);
 
-    return { name: namesMap[period], max, mean, min }
+    return { period, name: namesMap[period], max, mean, min }
 }

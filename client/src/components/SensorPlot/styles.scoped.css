@@ -1,16 +1,15 @@
 section {
     background-color: var(--color-box1);
-    padding: 1px 10px 10px 10px;
+    padding: 0 10px 10px 15px;
     border-radius: 15px;
-    margin: 10px;
-    width: 56vw;
-    min-height: 400px;
+    height: 500px;
+    margin-bottom: 20px;
 }
 
 h1 {
     font-size: 22pt;
     text-align: left;
-    margin-left: 20px;
+    margin-left: 5px;
 }
 
 .title-box {
@@ -21,6 +20,7 @@ h1 {
 .date-box {
     display: flex;
     align-items: center;
+    margin-right: 8px;
 }
 
 p {
