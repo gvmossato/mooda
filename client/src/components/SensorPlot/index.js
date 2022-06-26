@@ -176,7 +176,7 @@ function SensorPlot() {
                         <Chart options={plotOptions} series={plotData} type="area" height="350" width="700" />
                     :
                         <div className="loading-box">
-                            <TailSpin color="#636363" height={200} width={100} />
+                            <TailSpin color="#636363" height={100} width={100} />
                         </div>
                 }
             </div>

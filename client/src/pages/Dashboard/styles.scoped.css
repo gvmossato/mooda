@@ -1,3 +1,13 @@
 main {
     display: flex;
+    height: clamp(400px, 55vw, 700px);
+    width: clamp(400px, 90vw, 1200px);
+    background-color: aqua;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0 10px;
 }

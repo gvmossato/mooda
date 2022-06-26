@@ -1,17 +1,20 @@
 aside {
     display: flex;
     flex-direction: column;
+    width: 30%;
+    height: 100%;
+    background-color: blue;
 }
 
 img[alt='mooda-logo'] {
-    width: 200px;
+    width: 100%;
     margin: 20px auto;
 }
 
 .plant-review {
-    padding-bottom: 10px;
     background-color: var(--color-box1);
     border-radius: 15px;
+    flex-grow: 1;
 }
 
 .plant-frame {
@@ -27,17 +30,15 @@ img[alt='mooda-logo'] {
 img[alt='plant'] {
     width: 80px;
     object-fit: contain;
-
     margin: 20px auto;
 }
 
 .status-collection {
-    margin-top: 20px;
-}
-
-.loading-box {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-self: flex-end;
+    height: 35%;
 }
 
 .status {
@@ -45,8 +46,8 @@ img[alt='plant'] {
     display: flex;
     justify-content: space-between;
     background-color: var(--color-box2);
-    padding: 2px 10px;
-    margin: 10px 20px;
+    padding: 4px 10px;
+    margin: 0 10px;
     border-radius: 100px;
 }
 
@@ -57,9 +58,10 @@ p {
 }
 
 .icon {
+    font-size: 12pt;
     position: absolute;
-    top: 4px;
-    right: 5px;
+    top: 6px;
+    right: 6px;
 }
 
 .check {
@@ -68,4 +70,9 @@ p {
 
 .cross {
     color: var(--color-bad);
+}
+
+.loading-box {
+    display: flex;
+    justify-content: center;
 }

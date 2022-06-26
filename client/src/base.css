@@ -19,10 +19,17 @@
     --color-bad: #FF0000;
 }
 
-body {
+html, body, #root {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
     font-family: Nunito, Arial, sans-serif;
     color: var(--color-font);
     background-color: var(--color-background);
+    background-color: red;
 }
 
 .text-title {
