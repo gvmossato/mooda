@@ -15,11 +15,11 @@ function SensorPlot() {
     const { focus } = useContext(FocusContext)
 
     const now = getNowDate()
-    const yesterday = now.clone().subtract(1, 'days')
+    const tomorrow = now.clone().subtract(1, 'days')
 
     const [seriesData, setSeriesData] = useState([]);
-    const [startDate, setStartDate] = useState(formatDate(yesterday, 'client'));
-    const [endDate, setEndDate] = useState(formatDate(now, 'client'));
+    const [startDate, setStartDate] = useState(formatDate(now, 'client'));
+    const [endDate, setEndDate] = useState(formatDate(tomorrow, 'client'));
 
     useEffect(() => {
         async function requestData(focus, startDate, endDate) {
