@@ -53,6 +53,8 @@ function SensorSummary() {
         const min = thresholds[focus].min
         const max = thresholds[focus].max
 
+        if (value === '---') return ''
+
         return min <= value && value <= max ? 'good' : 'bad'
     }
 

@@ -1,4 +1,5 @@
 import getHappiness from "../api/getHappiness";
+import { formatDate } from "./format";
 import moment from "moment";
 
 
@@ -7,9 +8,10 @@ export default async function getStatus(sensor) {
 
     const latestHappiness = await getHappiness({
         sensor,
-        startDate: now.subtract(20, 'minutes').format("YYYY-MM-DD HH:mm:ss"),
-        endDate: now.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
+        startDate: formatDate(now.subtract(20, 'minutes')),
+        endDate: formatDate(now.add(1, 'days'))
     })
 
+    if (!latestHappiness.length) return false
     return latestHappiness.at(-1)[sensor]
 }

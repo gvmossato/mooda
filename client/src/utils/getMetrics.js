@@ -28,7 +28,7 @@ export default async function getMetrics(focus, period) {
         data = await getSensorData({ sensor, startDate, endDate })
     }
 
-    if (!data.length) return { period, max: 0 , mean: 0, min: 0 }
+    if (!data.length) return { period, max: '---' , mean: '---', min: '---' }
 
     data.forEach((el) => {
         if (el[sensor] < min) min = el[sensor];
