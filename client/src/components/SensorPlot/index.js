@@ -15,7 +15,7 @@ function SensorPlot() {
     const { focus } = useContext(FocusContext)
 
     const now = getNowDate()
-    const tomorrow = now.clone().subtract(1, 'days')
+    const tomorrow = now.clone().add(1, 'days')
 
     const [seriesData, setSeriesData] = useState([]);
     const [startDate, setStartDate] = useState(formatDate(now, 'client'));
