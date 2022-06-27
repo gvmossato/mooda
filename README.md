@@ -23,8 +23,7 @@
 <p align="center">
   <a href="#-sobre">📚 Sobre</a> | 
   <a href="#-site">🌎 Site</a>   | 
-  <a href="#-api">🧰 API</a> |
-  <a href="#-colaboradores">🧙 Colaboradores</a>
+  <a href="#-api">🧰 API</a>
 </p>
 
 <p align="center">
@@ -34,33 +33,106 @@
 <h4 align="center">
   :star: Curtiu? Deixe uma estrela! :star:
 </h4>
-# mooda
 
 ## 📚 Sobre
 
+A Mooda é um sistema de monitoramento composto por duas partes:
+
+1. Um sistema embarcado que deve ser colocado no vaso da própria planta, responsável por medir a temperatura, luminosidade, umidade do solo e outros, fornecendo um *feedback* em tempo real das condições dessa planta, para conferir os detalhes, [clique aqui](https://github.com/HenriqueKen/mooda-embarcado);
+
+2. Uma plataforma online que recebe os dados do sistema embarcado por Wi-Fi e fornece uma visão histórica com totalizações das amostras coletadas.
+
+Nesse repositório, encontram-se as particularidades dessa plataforma online.
+
 ## 🌎 Site
+
+<p align="center">
+   <img alt="mooda-site" src="https://i.ibb.co/hMpKVDg/mooda.gif" />
+</p>
+
+<p align="center">
+   🔗 Confira o site <a href="http://mood-a.herokuapp.com/">clicando aqui</a>! 🔗
+</p>
 
 ## 🧰 API
 
+Breve documentação dos *endpoints* da aplicação:
+
+<br />
+<br />
+
 ```
-https://mood-a.herokuapp.com/api?sensor={{sensor_name}}&startDate={{from}}&endDate={{to}}
+GET /api/sensors
 ```
 
-* `sensor_name`:
-    * `luminosity`
-    * `temperature`
-    * `soilHumidity`
-    * `airHumidity`
-    * `airQuality`
-    * `presence`
-    * If not set, returns data for all sensors
+Retorna um vetor com o último dia de todas as leituras de todos os sensores, recebidas em intervalos de 10 minutos. Parâmetros opicionais da *query*:
 
-* `startDate`:
-    * The "from" date
-    * If not set, is automatically set to last year from today
+#### `sensor`
 
-* `endtDate`:
-    * The "to" date
-    * If not set, is automatically set to tomorrow
+> Sensor em específico para se obter os dados.
 
-## 🧙 Colaboradores
+> Aceita um dos seguintes: `luminosity`, `temperature`, `soilMoisture`, `airMoisture`, `airQuality` e `presence`.
+
+#### `startDate`
+
+> Data de início da leiuras, estritamente no formato `YYYY-MM-DD`.
+
+#### `endDate`
+
+> Data de término da leiuras, estritamente no formato `YYYY-MM-DD`.
+
+<br />
+<br />
+
+```
+GET /api/happiness
+```
+
+Retorna um vetor com o último dia de todas as felicidades para todos os sensores cabíveis, calculadas em intervalos de 10 minutos. Parâmetros opicionais da *query*:
+
+#### `sensor`
+
+> Sensor em específico para se obter os dados.
+
+> Aceita um dos seguintes: `luminosity`, `temperature`, `soilMoisture`, `airMoisture` e `airQuality`.
+
+#### `startDate`
+
+> Data de início, estritamente no formato `YYYY-MM-DD`.
+
+#### `endDate`
+
+> Data de término, estritamente no formato `YYYY-MM-DD`.
+
+<br />
+<br />
+
+```
+POST /api/sensors
+```
+
+Retorna um vetor com três objetos: (1) as leituras inseridas no banco; (2) o enquadramento dessas leituras dentro dos limites aceitáveis e (3) a felicidade levando em conta o histórico de leituras, com essa inclusa. Parâmetros de *query* obrigatórios:
+
+#### `luminosity`
+
+> Leitura do sensor de luminosidade, em lúmens — `float`
+
+#### `temperature`
+
+> Leitura do sensor de temperatura, em °C — `float`
+
+#### `soilMoisture`
+
+> Leitura do sensor de umidade do solo, em % — `float`
+
+#### `airMoisture`
+
+> Leitura do sensor de umidade do ar, em % — `float`
+
+#### `airQuality`
+
+> Leitura de qualidade do ar, em ppm de CO₂ — `float`
+
+#### `presence`
+
+> Leitura do sensor de presença — `boolean`
