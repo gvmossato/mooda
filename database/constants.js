@@ -9,14 +9,14 @@ const thresholds = {
     },
     soilMoisture: {
         min: 10,
-        max: 30
+        max: 50
     },
     airMoisture: {
         min: 10,
-        max: 30
+        max: 80
     },
     airQuality: {
-        min: 300,
+        min: 400,
         max: 2000
     }
 }
