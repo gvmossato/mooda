@@ -75,11 +75,11 @@ Retorna um vetor com o último dia de todas as leituras de todos os sensores, re
 
 #### `startDate`
 
-> Data de início da leiuras, estritamente no formato `YYYY-MM-DD`.
+> Data de início da leituras, estritamente no formato `YYYY-MM-DD`.
 
 #### `endDate`
 
-> Data de término da leiuras, estritamente no formato `YYYY-MM-DD`.
+> Data de término da leituras, estritamente no formato `YYYY-MM-DD`.
 
 <br />
 <br />
