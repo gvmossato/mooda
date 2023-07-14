@@ -51,7 +51,7 @@ Nesse repositório, encontram-se as particularidades dessa plataforma online.
 </p>
 
 <p align="center">
-   🔗 Confira o site <a href="http://mood-a.herokuapp.com/">clicando aqui</a>! 🔗
+   🔗 Uma vez hosteado gratuitamente no <a href="http://mood-a.herokuapp.com/">Heroku</a>! Hoje, disponível apenas localmente. 🔗
 </p>
 
 ## 🧰 API
